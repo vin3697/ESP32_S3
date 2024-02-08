@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "esp_flash.h": "c",
+        "esp_chip_info.h": "c",
+        "task.h": "c",
+        "freertos.h": "c",
+        "sdkconfig.h": "c",
+        "esp_system.h": "c",
+        "led_strip_interface.h": "c",
+        "led_strip.h": "c",
+        "esp_log.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled",
+    "cmake.configureOnOpen": false
+}

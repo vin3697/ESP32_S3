@@ -1,0 +1,22 @@
+[1/14] Linking C static library esp-idf/mqtt/libmqtt.a
+[2/14] Linking C static library esp-idf/wifi_provisioning/libwifi_provisioning.a
+[3/14] Linking C static library esp-idf/spiffs/libspiffs.a
+[4/14] Linking C static library esp-idf/fatfs/libfatfs.a
+[5/14] Performing build step for 'bootloader'
+[1/1] cd /home/vin8/ESP32_S3/ESP32_S3/sample_project/build/bootloader/esp-idf/esptool_py && /home/vin8/.espressif/python_env/idf5.3_py3.8_env/bin/python /home/vin8/ESP32_S3/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/vin8/ESP32_S3/ESP32_S3/sample_project/build/bootloader/bootloader.bin
+Bootloader binary size 0x6870 bytes. 0x790 bytes (7%) free.
+[6/14] No install step for 'bootloader'
+[7/14] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+[8/14] Completed 'bootloader'
+[9/14] Linking C static library esp-idf/main/libmain.a
+[10/14] Generating ld/sections.ld
+[11/14] Building C object CMakeFiles/main.elf.dir/project_elf_src_esp32.c.obj
+[12/14] Linking CXX executable main.elf
+[13/14] Generating binary image from built executable
+esptool.py vv4.8.dev1
+Creating esp32 image...
+Merged 2 ELF sections
+Successfully created esp32 image.
+Generated /home/vin8/ESP32_S3/ESP32_S3/sample_project/build/main.bin
+[14/14] cd /home/vin8/ESP32_S3/ESP32_S3/sample_project/build/esp-idf/esptool_py && /home/vin8/.espressif/python_env/idf5.3_py3.8_env/bin/python /home/vin8/ESP32_S3/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/vin8/ESP32_S3/ESP32_S3/sample_project/build/partition_table/partition-table.bin /home/vin8/ESP32_S3/ESP32_S3/sample_project/build/main.bin
+main.bin binary size 0x2b530 bytes. Smallest app partition is 0x100000 bytes. 0xd4ad0 bytes (83%) free.

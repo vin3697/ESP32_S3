@@ -1,0 +1,1 @@
+/home/vin8/ESP32_S3/esp-idf/components/mbedtls/mbedtls/library/psa_crypto_driver_wrappers_no_static.c
