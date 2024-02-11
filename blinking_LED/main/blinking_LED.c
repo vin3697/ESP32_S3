@@ -1,36 +1,30 @@
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "esp_log.h"
 #include "led_strip.h"
 
-#include "esp_log.h"
-
-//#define CONFIG_BLINK_GPIO 48
-#define BLINK_GPIO 48
-#define CONFIG_BLINK_LED_STRIP_BACKEND_RMT 1
-#define CONFIG_BLINK_PERIOD 100
-
-//#define CONFIG_BLINK_LED_STRIP 1
-
-static led_strip_handle_t led_strip;
+//header file
+#include "blinking_LED.h"
 static const char *TAG = "example";
 
+static led_strip_handle_t led_strip;
 
 
-static void on_led(void){
+void on_led(void){
     /* Set the LED pixel using RGB from 0 (0%) to 255 (100%) for each color */
-    led_strip_set_pixel(led_strip, 0, 255, 0, 0);
+    led_strip_set_pixel(led_strip, 0, 0, 0, 255);
     /* Refresh the strip to send data */
     led_strip_refresh(led_strip);
 }
 
-static void off_led(void)
+void off_led(void)
 {
     /* Set all LED off to clear all pixels */
     led_strip_clear(led_strip);   
 }
 
-static void configure_led(void)
+void configure_led(void)
 {
     ESP_LOGI(TAG, "Example configured to blink addressable LED!");
     /* LED strip initialization with the GPIO and pixels number*/
@@ -51,18 +45,20 @@ static void configure_led(void)
     led_strip_clear(led_strip);
 }
 
+/*
 void app_main(void)
 {
 
-    /* Configure the peripheral according to the LED type */
+    //Configure the peripheral according to the LED type 
     configure_led();
 
     while (1) {
-        //ESP_LOGI(TAG, "Turning the LED %s!", s_led_state == true ? "ON" : "OFF");
+        ESP_LOGI(TAG, "Turning the LED");
         on_led();
-        /* Toggle the LED state */
+        //Toggle the LED state
         vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
         off_led();
         vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
     }
 }
+*/

@@ -10,7 +10,10 @@
         "led_strip.h": "c",
         "esp_log.h": "c",
         "clk_tree_defs.h": "c",
-        "soc_caps.h": "c"
+        "soc_caps.h": "c",
+        "blinking_led.h": "c",
+        "adc_read.h": "c",
+        "oneshot_read_main.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "cmake.configureOnOpen": false
