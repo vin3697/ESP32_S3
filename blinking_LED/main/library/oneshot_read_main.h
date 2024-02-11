@@ -7,7 +7,7 @@
 
 
 void configure_adc(void);
-void read_adc(void);
+int read_adc(void);
 
 /*
 

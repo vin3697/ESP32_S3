@@ -22,7 +22,7 @@ static adc_oneshot_unit_handle_t adc1_handle;
 static adc_cali_handle_t adc1_cali_chan0_handle = NULL;
 static bool do_calibration1_chan0;
 
-int adc_raw;
+static int adc_raw;
 int voltage;
 const static char *TAG = "EXAMPLE";
 
@@ -63,16 +63,17 @@ void configure_adc(void){
     
 }
 
-void read_adc(void){
+int read_adc(void){
 
 
     ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, EXAMPLE_ADC1_CHAN0, &adc_raw));
-    ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN0, adc_raw);
+    //ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN0, adc_raw);
     if (do_calibration1_chan0) {
         ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan0_handle, adc_raw, &voltage));
-        ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN0, voltage);
+        //ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN0, voltage);
     }
     vTaskDelay(pdMS_TO_TICKS(1000));
+    return voltage;
 
 
 }

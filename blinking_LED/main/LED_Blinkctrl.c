@@ -10,21 +10,28 @@
 #include "oneshot_read_main.h" 
 
 static const char *TAG = "example";
+static int voltage = 0;
+
 
 void app_main(void)
 {
 
-    //Configure the peripheral according to the LED type 
+    //Configure the peripherals
     configure_led();
     configure_adc();
     
     while (1) {
-        ESP_LOGI(TAG, "Turning the LED");
+        
+        ESP_LOGI(TAG, "LED toggle");
         //Toggle the LED state
         on_led();
         vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
         off_led();
         vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
-        read_adc();
+        
+        //ADC
+        voltage = read_adc();
+        ESP_LOGI(TAG, "Voltage in milliVolts is : %d", voltage);
+
     }
 }
