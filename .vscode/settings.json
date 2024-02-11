@@ -8,7 +8,9 @@
         "esp_system.h": "c",
         "led_strip_interface.h": "c",
         "led_strip.h": "c",
-        "esp_log.h": "c"
+        "esp_log.h": "c",
+        "clk_tree_defs.h": "c",
+        "soc_caps.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "cmake.configureOnOpen": false
