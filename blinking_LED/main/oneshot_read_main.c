@@ -23,7 +23,7 @@ static adc_cali_handle_t adc1_cali_chan0_handle = NULL;
 static bool do_calibration1_chan0;
 
 static int adc_raw;
-int voltage;
+static int voltage;
 const static char *TAG = "EXAMPLE";
 
 

@@ -10,28 +10,35 @@
 #include "oneshot_read_main.h" 
 
 static const char *TAG = "example";
-static int voltage = 0;
+int voltage = 0;
 
+const TickType_t xDelay = CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS;
 
 void app_main(void)
 {
 
-    //Configure the peripherals
+    // configure the peripherals!
     configure_led();
     configure_adc();
     
     while (1) {
-        
-        ESP_LOGI(TAG, "LED toggle");
-        //Toggle the LED state
-        on_led();
-        vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
-        off_led();
-        vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
-        
         //ADC
         voltage = read_adc();
         ESP_LOGI(TAG, "Voltage in milliVolts is : %d", voltage);
-
+        voltage = 10 - voltage/99;
+        ESP_LOGI(TAG, "Normalization value is   : %d", voltage);
+        ESP_LOGI(TAG, "LED toggle");
+        if(voltage == 10){
+            on_led();
+        }
+        else{
+        //Toggle the LED state
+        on_led();
+        vTaskDelay(xDelay + voltage*xDelay);
+        off_led();
+        vTaskDelay(xDelay + voltage*xDelay);
+        //color change!
+        }
     }
+
 }
