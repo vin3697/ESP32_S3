@@ -74,7 +74,15 @@ Formula to calculate Vout = Dout * Vmax / Dmax
 ```
 
 
+### Issues
+* https://esp32.com/viewtopic.php?t=1459
+```
+idf.py menuconfig
 
+Component config -> FreeRTOS -> Kernel -> configTIMER_TASK_STACK_DEPTH
+configTIMER_TASK_STACK_DEPTH = changed to 16384 
+
+```
 
 
 
