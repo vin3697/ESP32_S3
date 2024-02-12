@@ -40,8 +40,8 @@ static void vLEDfreqTimerCallback( TimerHandle_t pxTimer );
 static void vcolrChngTimerSetup();
 static void vcolrChngCallback();
 
+//#define COLOR_CHANGE FALSE // to use blinking LED with frequencies
 #define COLOR_CHANGE TRUE
-
 
 //software timer implementation
 TimerHandle_t xLEDblinkFreqTimer = NULL;                             //Timer handle for BlinkLED freq w.r.t voltage
