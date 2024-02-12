@@ -13,6 +13,7 @@
 void on_led(void);
 void off_led(void);
 void configure_led(void);
+void change_color(int *pVColor);
 
 /*
 !DONT define variables with static and Done define static functions (their visiblity is to particular translation unit) 

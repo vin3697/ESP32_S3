@@ -10,6 +10,17 @@ static const char *TAG = "example";
 
 static led_strip_handle_t led_strip;
 
+int rLED, gLED, bLED; 
+
+void change_color(int *pVColor){
+    *pVColor = *pVColor/4;
+    //ESP_LOGI(TAG, "Color blinking_LED %d", *pVColor);
+    rLED = 256 - *pVColor;
+    gLED = *pVColor;
+    bLED = 255;
+    led_strip_set_pixel(led_strip, 0, rLED, gLED, bLED);
+    led_strip_refresh(led_strip);
+}
 
 void on_led(void){
     /* Set the LED pixel using RGB from 0 (0%) to 255 (100%) for each color */
