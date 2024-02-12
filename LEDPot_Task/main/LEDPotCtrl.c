@@ -22,15 +22,16 @@ and color change depending upon Potentiometer
 
 static const char *TAG   = "example";
 static int voltage       = 0;
-static float linearVoltage = 0;
+
+//static float linearVoltage = 0;
 const TickType_t xDelay  = CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS;
-static int mapValue;
+//static int mapValue;
 
 //blinking function
 void blink_LED(void);
 
 //function to linearize the potentiometer values
-int NormValue();
+//int NormValue();
 
 void app_main(void)
 {
@@ -48,14 +49,14 @@ void app_main(void)
         //blink_LED();
 
         //change LED color with Pot
-        voltage = NormValue();
+        //voltage = NormValue();
         chngLEDcolr(&voltage);
 
     }
 
 }
 
-
+/*
 int NormValue(){
 
     float maxVoltage = 988; //milliVolts and min voltage is 0
@@ -71,26 +72,27 @@ int NormValue(){
     return linearVoltage;
 
 }
-
+*/
 
 void blink_LED(void){
 
     //ESP_LOGI(TAG, "Voltage in milliVolts is : %d", voltage);
 
-    normalize the voltage into linear values from 0 - 10
-    mapValue = NormValue();
-    mapValue = mapValue / 52;
+    //normalize the voltage into linear values from 0 - 10
+    //mapValue = NormValue();
+    //mapValue = mapValue / 52;
     //ESP_LOGI(TAG, "Normalization value is   : %d", mapValue);
 
-    ESP_LOGI(TAG, "LED toggle");
+    voltage = voltage / 11; 
+    //ESP_LOGI(TAG, "LED toggle");
     
-    if(mapValue == 9){
+    if(voltage == 10){
         on_led();
     }
     else{
         //Toggle the LED state
         on_led();
-        vTaskDelay(mapValue*xDelay);
+        vTaskDelay(voltage*xDelay);
         off_led();
     }
     

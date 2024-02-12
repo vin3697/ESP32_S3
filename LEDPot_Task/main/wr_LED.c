@@ -24,21 +24,25 @@ static int rLED, gLED, bLED;
 
 void chngLEDcolr(int *pVColor){
 
-    *pVColor = *pVColor + 40;
-
-    if(*pVColor < 255){
-        *pVColor = *pVColor;
+    if(*pVColor < 329){
+        *pVColor = (*pVColor*3)/4;
         //ESP_LOGI(TAG, "Color blinking_LED %d", *pVColor);
         rLED = 256 - *pVColor;
-        gLED = 255;
-        bLED = *pVColor;
+        gLED = *pVColor;
+        bLED = 1;
     }
-    else{
-        *pVColor = *pVColor/2;
+    else if(*pVColor < 658){
+        *pVColor = ((*pVColor - 329)*3)/4;
         //ESP_LOGI(TAG, "Color blinking_LED %d", *pVColor);
         rLED = *pVColor;
-        gLED = 256 - *pVColor;
-        bLED = 0;
+        gLED = 255;
+        bLED = 256 - *pVColor;
+    }
+    else{
+        *pVColor = ((*pVColor-658)*3)/4;
+        rLED = 255;
+        gLED = *pVColor;
+        bLED = 256 - *pVColor;     
     }
 
     led_strip_set_pixel(led_strip, 0, rLED, gLED, bLED);
