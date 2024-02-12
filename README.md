@@ -7,6 +7,7 @@
   eg: idf.py create-project -p . blinking_LED
 - idf.py menuconfig
 - CmakeLists (Make the important changes : Include Libraries and Link the C files)
+  /home/user/ESP32_S3/ESP32_S3/project_folder/main/CMakeLists.txt
 ```
 PORT NAME
 ```

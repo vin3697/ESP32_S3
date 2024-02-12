@@ -5,9 +5,9 @@
 
 #include "led_strip.h"
 
-//include the header files
-#include "blinking_LED.h"
-#include "oneshot_read_main.h" 
+//header files LED and ADC
+#include "wr_LED.h"
+#include "read_ADC.h" 
 
 static const char *TAG = "example";
 int voltage = 0;

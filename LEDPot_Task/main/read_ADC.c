@@ -3,6 +3,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,8 +17,8 @@
 #include "esp_adc/adc_cali_scheme.h"
 
 
-//include header file
-#include "oneshot_read_main.h" 
+//header file : read_ADC
+#include "read_ADC.h" 
 
 static adc_oneshot_unit_handle_t adc1_handle;
 static adc_cali_handle_t adc1_cali_chan0_handle = NULL;

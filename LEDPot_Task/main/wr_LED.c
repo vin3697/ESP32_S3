@@ -1,11 +1,20 @@
+/*
+
+LED functions : On, Off and Color change w.r.t Voltage at GPIO3/ADCH2
+
+*/
+
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_log.h"
 #include "led_strip.h"
 
-//header file
-#include "blinking_LED.h"
+
+//header file : wr_LED
+#include "wr_LED.h"
+
+
 static const char *TAG = "example";
 
 static led_strip_handle_t led_strip;
