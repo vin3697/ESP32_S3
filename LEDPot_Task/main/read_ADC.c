@@ -125,6 +125,7 @@ static bool example_adc_calibration_init(adc_unit_t unit, adc_channel_t channel,
     return calibrated;
 }
 
+/*
 static void example_adc_calibration_deinit(adc_cali_handle_t handle)
 {
 #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED
@@ -136,3 +137,4 @@ static void example_adc_calibration_deinit(adc_cali_handle_t handle)
     ESP_ERROR_CHECK(adc_cali_delete_scheme_line_fitting(handle));
 #endif
 }
+*/
