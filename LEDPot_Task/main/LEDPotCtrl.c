@@ -20,27 +20,91 @@ and color change depending upon Potentiometer
 //header files LED and ADC
 #include "wr_LED.h"
 #include "read_ADC.h" 
+#define PERIOD_MS 100
 
 static const char *TAG   = "example";
 static int voltage   = 0;
 
-//static float linearVoltage = 0;
-const TickType_t xDelay  = CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS;
-//static int mapValue;
-
-//blinking function
-void blink_LED(void);
-
+/*
 //function to linearize the potentiometer values
 //int NormValue();
+//static float linearVoltage = 0;
+//static int mapValue; 
+*/
+
+//#define response_time (pdMS_TO_TICKS(100))                         //100ms to ticks
+
+const TickType_t xDelay  = CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS; //delay of 10ms //const TickType_t xDelay = 10 / portTICK_PERIOD_MS;  
+
+//blinking function
+static void blink_LED(void);
 
 //software timer implementation
+TimerHandle_t xLEDblinkFreqTimer = NULL;                             //Timer for BlinkLED freq w.r.t voltage
 
-
-
-void app_main(void)
+static void vLEDfreqTimerCallback( TimerHandle_t pxTimer )
 {
 
+    //get voltage from ADC
+    voltage = read_adc();
+    //blink freq with Pot
+    blink_LED();
+
+}
+
+static void blink_LED(void){
+
+    voltage = voltage / 89;       //normalize value between 0-11
+    //ESP_LOGI(TAG, "LED toggle");
+    ESP_LOGI(TAG, "Normvoltage   : %d", voltage);
+    if(voltage == 11){
+        on_led();
+    }
+    else{
+        //Toggle the LED state
+        on_led();
+        vTaskDelay(voltage*voltage*xDelay); // !delay less than 100ms
+        off_led();
+    }
+    
+}
+
+
+//main func
+void app_main(void)
+{
+    // configure the peripherals!
+    configure_led();
+    configure_adc();
+
+    // Create then start the Auto-reload timer that is responsible for
+    // blinking the LED with different frequencies.
+    xLEDblinkFreqTimer = xTimerCreate( "LEDblinkTimer",           // Just a text name, not used by the kernel.
+                                    pdMS_TO_TICKS(PERIOD_MS),     // The timer period in milliSecs.
+                                    pdTRUE,                       // The timer is a one-shot timer.
+                                    0,                            // The id is not used by the callback so can take any value.
+                                    vLEDfreqTimerCallback         // The callback function that switches the LCD back-light off.
+                                );
+
+    if( xLEDblinkFreqTimer == NULL )
+    {
+        // The timer was not created.
+        ESP_LOGE(TAG, "Failed to create timer");
+    }
+    else
+    {
+        // Start the timer.  No block time is specified, and even if one was
+        // it would be ignored because the scheduler has not yet been
+        // started.
+        if( xTimerStart( xLEDblinkFreqTimer, 0 ) != pdPASS ) // xTimerStart(xTimer, xTicksToWait)
+        {
+            // The timer could not be set into the Active state.
+        }
+    }
+
+}
+
+    /*
     // configure the peripherals!
     configure_led();
     configure_adc();
@@ -58,32 +122,7 @@ void app_main(void)
         chngLEDcolr(&voltage);
 
     }
-
-}
-
-void blink_LED(void){
-
-    //ESP_LOGI(TAG, "Voltage in milliVolts is : %d", voltage);
-
-    //normalize the voltage into linear values from 0 - 10
-    //mapValue = NormValue();
-    //mapValue = mapValue / 52;
-    //ESP_LOGI(TAG, "Normalization value is   : %d", mapValue);
-
-    voltage = voltage / 11; 
-    //ESP_LOGI(TAG, "LED toggle");
-    
-    if(voltage == 10){
-        on_led();
-    }
-    else{
-        //Toggle the LED state
-        on_led();
-        vTaskDelay(voltage*xDelay);
-        off_led();
-    }
-    
-}
+    */
 
 /*
 int NormValue(){
