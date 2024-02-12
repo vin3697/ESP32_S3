@@ -4,6 +4,7 @@ LED functions : On, Off and Color change w.r.t Voltage at GPIO3/ADCH2
 
 */
 
+#include <stdint.h>
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -19,7 +20,7 @@ static const char *TAG = "example";
 
 static led_strip_handle_t led_strip;
 
-static int rLED, gLED, bLED; 
+static uint8_t rLED, gLED, bLED; 
 
 
 void chngLEDcolr(int *pVColor){
