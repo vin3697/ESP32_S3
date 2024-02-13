@@ -23,7 +23,7 @@ and color change depending upon Potentiometer
 #include "read_ADC.h" 
 #define PERIOD_MS 100
 // to use blinking LED with frequencies
-#define COLOR_CHANGE TRUE
+//#define COLOR_CHANGE TRUE
 
 static const char *TAG   = "example";
 static int voltage   = 0;
@@ -73,8 +73,8 @@ void app_main(void)
 
 static void blink_LED(void){
 
+    //ESP_LOGI(TAG, "Voltage in ms : %d", voltage);
     voltage = voltage / 89;            //normalize value between 0-11
-    //ESP_LOGI(TAG, "LED toggle");
     ESP_LOGI(TAG, "Frequency with LED is blinking : %d", voltage);
     if(voltage == 11){
         on_led();                      //for Freq. 11 LED will remain On!
@@ -82,7 +82,10 @@ static void blink_LED(void){
     else{
         //Toggle the LED state
         on_led();
-        vTaskDelay(voltage*voltage*xDelay); // !delay less than 100ms
+        vTaskDelay(voltage*xDelay); // !delay less than 100ms ||with voltage*voltage*xDelay 1000ms
+        /*
+            with above delay of (voltage*xDelay) - execution time of blink function is 100ms
+        */
         off_led();
     }
     
@@ -190,10 +193,11 @@ static void vLEDfreqTimerCallback( TimerHandle_t pxTimer )
        is performed it hardly possible to notice by eyes!
     3. I might need to consider only RAW values from read_ADC and not actual voltage values. 
 
+    SOLUTION : reduced the execution time of blinkLED method to 100ms.
     */
     end_time = esp_timer_get_time();
-    execution_time_ms = (end_time - start_time)/1000;
-
+    execution_time_ms = (end_time - start_time);
+    execution_time_ms = execution_time_ms/1000;
     ESP_LOGI(TAG, "Execution time of LED blink function in milli seconds: %dms", execution_time_ms);
 
 }
