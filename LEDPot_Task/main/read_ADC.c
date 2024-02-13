@@ -17,7 +17,7 @@
 #include "esp_adc/adc_cali.h"
 #include "esp_adc/adc_cali_scheme.h"
 
-
+#include "esp_timer.h"
 //header file : read_ADC
 #include "read_ADC.h" 
 
@@ -75,19 +75,25 @@ int read_adc(void){
         ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan0_handle, adc_raw, &voltage));
         //ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN0, voltage);
     }
-    vTaskDelay(pdMS_TO_TICKS(1000));
+    //vTaskDelay(pdMS_TO_TICKS(1000)); //1sec delay was produced by this!
     return voltage;
 
 
 }
-
 /*
 void app_main(void)
 {
     configure_adc();
-    read_adc();
-}
-*/
+    while(1){
+        int start_time = esp_timer_get_time();
+        read_adc();
+        int end_time = esp_timer_get_time();
+        int execution_time_ms = (end_time - start_time)/1000;
+
+        ESP_LOGI(TAG, "Execution time in milli seconds: %dms", execution_time_ms);
+    }
+}*/
+
 
 /*---------------------------------------------------------------
         ADC Calibration
