@@ -41,7 +41,7 @@ static void vcolrChngTimerSetup();
 static void vcolrChngCallback();
 
 // to use blinking LED with frequencies
-//#define COLOR_CHANGE TRUE
+#define COLOR_CHANGE TRUE
 
 //software timer implementation
 TimerHandle_t xLEDblinkFreqTimer = NULL;                             //Timer handle for BlinkLED freq w.r.t voltage
@@ -70,11 +70,11 @@ void app_main(void)
 
 static void blink_LED(void){
 
-    voltage = voltage / 89;       //normalize value between 0-11
+    voltage = voltage / 89;            //normalize value between 0-11
     //ESP_LOGI(TAG, "LED toggle");
-    ESP_LOGI(TAG, "Norm voltage   : %d", voltage);
+    ESP_LOGI(TAG, "Frequency with LED is blinking : %d", voltage);
     if(voltage == 11){
-        on_led();
+        on_led();                      //for Freq. 11 LED will remain On!
     }
     else{
         //Toggle the LED state

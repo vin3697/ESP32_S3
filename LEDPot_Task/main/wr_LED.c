@@ -45,7 +45,7 @@ void chngLEDcolr(int *pVColor){
         gLED = *pVColor;
         bLED = 256 - *pVColor;     
     }
-
+    ESP_LOGI(TAG, "RGB pixel values are : Red %d Green %d Blue %d ", rLED, gLED, bLED);
     led_strip_set_pixel(led_strip, 0, rLED, gLED, bLED);
     led_strip_refresh(led_strip);
 
