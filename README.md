@@ -97,7 +97,65 @@ I (16442) example: Execution time of ADC read function in milli seconds: 999ms
 ---
 
 ---
-## Time profiling for blink_LED() function
+## Time profiling for blink_LED() function with delay :: vTaskDelay(voltage*xDelay)
+```
+I (28913) example: Execution time of LED blink function in milli seconds: 20ms
+I (29913) example: Frequency with LED is blinking : 1
+I (29923) example: Execution time of LED blink function in milli seconds: 10ms
+I (30923) example: Frequency with LED is blinking : 1
+I (30933) example: Execution time of LED blink function in milli seconds: 10ms
+I (31933) example: Frequency with LED is blinking : 2
+I (31953) example: Execution time of LED blink function in milli seconds: 20ms
+I (32953) example: Frequency with LED is blinking : 2
+I (32973) example: Execution time of LED blink function in milli seconds: 20ms
+I (33973) example: Frequency with LED is blinking : 2
+I (33993) example: Execution time of LED blink function in milli seconds: 20ms
+I (34993) example: Frequency with LED is blinking : 2
+I (35013) example: Execution time of LED blink function in milli seconds: 20ms
+I (36013) example: Frequency with LED is blinking : 3
+I (36043) example: Execution time of LED blink function in milli seconds: 30ms
+I (37043) example: Frequency with LED is blinking : 3
+I (37073) example: Execution time of LED blink function in milli seconds: 30ms
+I (38073) example: Frequency with LED is blinking : 3
+I (38103) example: Execution time of LED blink function in milli seconds: 30ms
+I (39103) example: Frequency with LED is blinking : 4
+I (39143) example: Execution time of LED blink function in milli seconds: 40ms
+I (40143) example: Frequency with LED is blinking : 5
+I (40193) example: Execution time of LED blink function in milli seconds: 50ms
+I (41193) example: Frequency with LED is blinking : 6
+I (41253) example: Execution time of LED blink function in milli seconds: 60ms
+I (42253) example: Frequency with LED is blinking : 7
+I (42323) example: Execution time of LED blink function in milli seconds: 70ms
+I (43323) example: Frequency with LED is blinking : 7
+I (43393) example: Execution time of LED blink function in milli seconds: 70ms
+I (44393) example: Frequency with LED is blinking : 7
+I (44463) example: Execution time of LED blink function in milli seconds: 70ms
+I (45463) example: Frequency with LED is blinking : 8
+I (45543) example: Execution time of LED blink function in milli seconds: 80ms
+I (46543) example: Frequency with LED is blinking : 8
+I (46623) example: Execution time of LED blink function in milli seconds: 80ms
+I (47623) example: Frequency with LED is blinking : 9
+I (47713) example: Execution time of LED blink function in milli seconds: 90ms
+I (48713) example: Frequency with LED is blinking : 10
+I (48813) example: Execution time of LED blink function in milli seconds: 100ms
+I (49813) example: Frequency with LED is blinking : 10
+I (49913) example: Execution time of LED blink function in milli seconds: 100ms
+I (50913) example: Frequency with LED is blinking : 10
+I (51013) example: Execution time of LED blink function in milli seconds: 100ms
+I (52013) example: Frequency with LED is blinking : 10
+I (52113) example: Execution time of LED blink function in milli seconds: 100ms
+I (53113) example: Frequency with LED is blinking : 10
+I (53213) example: Execution time of LED blink function in milli seconds: 100ms
+I (54213) example: Frequency with LED is blinking : 11
+I (54213) example: Execution time of LED blink function in milli seconds: 0ms
+I (55213) example: Frequency with LED is blinking : 11
+I (55213) example: Execution time of LED blink function in milli seconds: 0ms
+```
+---
+
+
+---
+## Time profiling for blink_LED() function with delay :: vTaskDelay((voltage^2)*xDelay)
 
 ```
 I (1443) example: Frequency with LED is blinking : 0
@@ -162,7 +220,7 @@ I (38313) example: Execution time of LED blink function in milli seconds: 0ms
 ---
 
 ---
-## Time profiling for vcolrChngCallback() function
+## Time profiling for chngLEDcolr() function
 
 ```
 I (342) main_task: Returned from app_main()
