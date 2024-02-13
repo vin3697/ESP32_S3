@@ -20,7 +20,7 @@ static const char *TAG = "example";
 
 static led_strip_handle_t led_strip;
 
-static uint8_t rLED, gLED, bLED; 
+static uint16_t rLED, gLED, bLED; 
 
 
 void chngLEDcolr(int *pVColor){
