@@ -75,24 +75,29 @@ I (29352) example: RGB pixel values are : Red 140 Green 116 Blue 1
 ## Time profiling for read_adc() function
 
 ```
-I (342) EXAMPLE: Calibration Success
 I (342) main_task: Returned from app_main()
-I (1442) example: Execution time of ADC read function in milli seconds: 999ms
-I (2442) example: Execution time of ADC read function in milli seconds: 999ms
-I (3442) example: Execution time of ADC read function in milli seconds: 999ms
-I (4442) example: Execution time of ADC read function in milli seconds: 999ms
-I (5442) example: Execution time of ADC read function in milli seconds: 999ms
-I (6442) example: Execution time of ADC read function in milli seconds: 999ms
-I (7442) example: Execution time of ADC read function in milli seconds: 999ms
-I (8442) example: Execution time of ADC read function in milli seconds: 999ms
-I (9442) example: Execution time of ADC read function in milli seconds: 999ms
-I (10442) example: Execution time of ADC read function in milli seconds: 999ms
-I (11442) example: Execution time of ADC read function in milli seconds: 999ms
-I (12442) example: Execution time of ADC read function in milli seconds: 999ms
-I (13442) example: Execution time of ADC read function in milli seconds: 999ms
-I (14442) example: Execution time of ADC read function in milli seconds: 999ms
-I (15442) example: Execution time of ADC read function in milli seconds: 999ms
-I (16442) example: Execution time of ADC read function in milli seconds: 999ms
+I (442) example: Execution time in micro seconds: 221us
+I (542) example: Execution time in micro seconds: 41us
+I (642) example: Execution time in micro seconds: 40us
+I (742) example: Execution time in micro seconds: 38us
+I (842) example: Execution time in micro seconds: 38us
+I (942) example: Execution time in micro seconds: 38us
+I (1042) example: Execution time in micro seconds: 38us
+I (1142) example: Execution time in micro seconds: 38us
+I (1242) example: Execution time in micro seconds: 38us
+I (1342) example: Execution time in micro seconds: 38us
+I (1442) example: Execution time in micro seconds: 38us
+I (1542) example: Execution time in micro seconds: 38us
+I (1642) example: Execution time in micro seconds: 38us
+I (1742) example: Execution time in micro seconds: 38us
+I (1842) example: Execution time in micro seconds: 38us
+I (1942) example: Execution time in micro seconds: 38us
+I (2042) example: Execution time in micro seconds: 38us
+I (2142) example: Execution time in micro seconds: 38us
+I (2242) example: Execution time in micro seconds: 38us
+I (2342) example: Execution time in micro seconds: 38us
+I (2442) example: Execution time in micro seconds: 38us
+I (2542) example: Execution time in micro seconds: 38us
 ```
 ---
 
