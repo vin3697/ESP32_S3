@@ -55,12 +55,16 @@ void app_main(void)
     // configure the peripherals!
     configure_led();
     configure_adc();
-
+    
     #ifdef COLOR_CHANGE
         vcolrChngTimerSetup();
     #elif
         vLEDFreqTimerSetup();
     #endif
+    
+    // Starting the scheduler will start the timers running as they have already
+    // been set into the active state.
+    //vTaskStartScheduler(); 
 
 }
 
@@ -89,11 +93,11 @@ static void vcolrChngTimerSetup(){
 
     // Create then start the Auto-reload timer that is responsible for
     // blinking the LED with different frequencies.
-    xcolrChngTimer = xTimerCreate( "colrChngTimer",           // Just a text name, not used by the kernel.
+    xcolrChngTimer = xTimerCreate( "colrChngTimer",               // Just a text name, not used by the kernel.
                                     pdMS_TO_TICKS(PERIOD_MS),     // The timer period in milliSecs.
                                     pdTRUE,                       // The timer is a one-shot timer.
                                     0,                            // The id is not used by the callback so can take any value.
-                                    vcolrChngCallback         // The callback function that switches the LCD back-light off.
+                                    vcolrChngCallback             // The callback function that changes the color of LED w.r.t voltage.
                                 );
 
     if( xcolrChngTimer == NULL )
@@ -109,6 +113,7 @@ static void vcolrChngTimerSetup(){
         if( xTimerStart( xcolrChngTimer, 0 ) != pdPASS ) // xTimerStart(xTimer, xTicksToWait)
         {
             // The timer could not be set into the Active state.
+            ESP_LOGE(TAG, "Failed to set color change timer into active state");
         }
     }
 
@@ -136,7 +141,7 @@ static void vLEDFreqTimerSetup(){
                                     pdMS_TO_TICKS(PERIOD_MS),     // The timer period in milliSecs.
                                     pdTRUE,                       // The timer is a one-shot timer.
                                     0,                            // The id is not used by the callback so can take any value.
-                                    vLEDfreqTimerCallback         // The callback function that switches the LCD back-light off.
+                                    vLEDfreqTimerCallback         // The callback function that blins LED w.r.t Freq.
                                 );
 
     if( xLEDblinkFreqTimer == NULL )
@@ -152,6 +157,7 @@ static void vLEDFreqTimerSetup(){
         if( xTimerStart( xLEDblinkFreqTimer, 0 ) != pdPASS ) // xTimerStart(xTimer, xTicksToWait)
         {
             // The timer could not be set into the Active state.
+            ESP_LOGE(TAG, "Failed to set blink LED timer into active state");
         }
     }
 
