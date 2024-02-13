@@ -175,6 +175,7 @@ static void vLEDFreqTimerSetup(){
 static void vLEDfreqTimerCallback( TimerHandle_t pxTimer )
 {
 
+    //start_time = esp_timer_get_time();
     //get voltage from ADC
     voltage = read_adc();          //this reading of voltage function takes ~999ms for its own execution
 
@@ -188,12 +189,12 @@ static void vLEDfreqTimerCallback( TimerHandle_t pxTimer )
     2. so that its possible to have a max delay of 100ms and min of 10ms, but the speed at which execution
        is performed it hardly possible to notice by eyes!
     3. I might need to consider only RAW values from read_ADC and not actual voltage values. 
-    
+
     */
     end_time = esp_timer_get_time();
     execution_time_ms = (end_time - start_time)/1000;
 
-    ESP_LOGI(TAG, "Execution time in milli seconds: %dms", execution_time_ms);
+    ESP_LOGI(TAG, "Execution time of LED blink function in milli seconds: %dms", execution_time_ms);
 
 }
 
