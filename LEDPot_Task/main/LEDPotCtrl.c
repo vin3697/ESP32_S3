@@ -23,7 +23,7 @@ and color change depending upon Potentiometer
 #include "read_ADC.h" 
 #define PERIOD_MS 100
 // to use blinking LED with frequencies
-//#define COLOR_CHANGE TRUE
+#define COLOR_CHANGE TRUE
 
 static const char *TAG   = "example";
 static int voltage   = 0;
@@ -84,7 +84,7 @@ static void blink_LED(void){
         on_led();
         vTaskDelay(voltage*xDelay); // !delay less than 100ms ||with voltage*voltage*xDelay 1000ms
         /*
-            with above delay of (voltage*xDelay) - execution time of blink function is 100ms
+            with above delay of (voltage*xDelay) - execution time of blink function is [0ms, 100ms]
         */
         off_led();
     }
@@ -126,14 +126,14 @@ static void vcolrChngTimerSetup(){
 }
 
 static void vcolrChngCallback(){
-
+    start_time = esp_timer_get_time();
     //get voltage from ADC
     voltage = read_adc();
-
-    start_time = esp_timer_get_time();
+    end_time = esp_timer_get_time();
+    //start_time = esp_timer_get_time();
     //color change method
     chngLEDcolr(&voltage);               //this color change function takes ~ 598us
-    end_time = esp_timer_get_time();
+    //end_time = esp_timer_get_time();
     execution_time_us = (end_time - start_time);
 
     ESP_LOGI(TAG, "Execution time in micro seconds: %dus", execution_time_us);
@@ -178,10 +178,10 @@ static void vLEDFreqTimerSetup(){
 static void vLEDfreqTimerCallback( TimerHandle_t pxTimer )
 {
 
-    //start_time = esp_timer_get_time();
+    
     //get voltage from ADC
     voltage = read_adc();          //this reading of voltage function takes ~999ms for its own execution
-
+    
     start_time = esp_timer_get_time();
     //blink freq with Pot
     blink_LED();                   //this blinking function takes [0ms-1000ms] for its execution
