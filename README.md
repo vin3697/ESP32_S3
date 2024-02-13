@@ -70,6 +70,145 @@ I (27352) example: RGB pixel values are : Red 140 Green 116 Blue 1
 I (28352) example: RGB pixel values are : Red 141 Green 115 Blue 1 
 I (29352) example: RGB pixel values are : Red 140 Green 116 Blue 1 
 ```
+
+---
+## Time profiling for read_adc() function
+
+```
+I (342) EXAMPLE: Calibration Success
+I (342) main_task: Returned from app_main()
+I (1442) example: Execution time of ADC read function in milli seconds: 999ms
+I (2442) example: Execution time of ADC read function in milli seconds: 999ms
+I (3442) example: Execution time of ADC read function in milli seconds: 999ms
+I (4442) example: Execution time of ADC read function in milli seconds: 999ms
+I (5442) example: Execution time of ADC read function in milli seconds: 999ms
+I (6442) example: Execution time of ADC read function in milli seconds: 999ms
+I (7442) example: Execution time of ADC read function in milli seconds: 999ms
+I (8442) example: Execution time of ADC read function in milli seconds: 999ms
+I (9442) example: Execution time of ADC read function in milli seconds: 999ms
+I (10442) example: Execution time of ADC read function in milli seconds: 999ms
+I (11442) example: Execution time of ADC read function in milli seconds: 999ms
+I (12442) example: Execution time of ADC read function in milli seconds: 999ms
+I (13442) example: Execution time of ADC read function in milli seconds: 999ms
+I (14442) example: Execution time of ADC read function in milli seconds: 999ms
+I (15442) example: Execution time of ADC read function in milli seconds: 999ms
+I (16442) example: Execution time of ADC read function in milli seconds: 999ms
+```
+---
+
+---
+## Time profiling for blink_LED() function
+
+```
+I (1443) example: Frequency with LED is blinking : 0
+I (1443) example: Execution time of LED blink function in milli seconds: 1ms
+I (2443) example: Frequency with LED is blinking : 0
+I (2443) example: Execution time of LED blink function in milli seconds: 0ms
+I (3443) example: Frequency with LED is blinking : 0
+I (3443) example: Execution time of LED blink function in milli seconds: 0ms
+I (4443) example: Frequency with LED is blinking : 0
+I (4443) example: Execution time of LED blink function in milli seconds: 0ms
+I (5443) example: Frequency with LED is blinking : 0
+I (5443) example: Execution time of LED blink function in milli seconds: 0ms
+I (6443) example: Frequency with LED is blinking : 0
+I (6443) example: Execution time of LED blink function in milli seconds: 0ms
+I (7443) example: Frequency with LED is blinking : 0
+I (7443) example: Execution time of LED blink function in milli seconds: 0ms
+I (8443) example: Frequency with LED is blinking : 1
+I (8453) example: Execution time of LED blink function in milli seconds: 10ms
+I (9453) example: Frequency with LED is blinking : 2
+I (9493) example: Execution time of LED blink function in milli seconds: 40ms
+I (10493) example: Frequency with LED is blinking : 3
+I (10583) example: Execution time of LED blink function in milli seconds: 90ms
+I (11583) example: Frequency with LED is blinking : 7
+I (12073) example: Execution time of LED blink function in milli seconds: 490ms
+I (13073) example: Frequency with LED is blinking : 11
+I (13073) example: Execution time of LED blink function in milli seconds: 0ms
+I (14073) example: Frequency with LED is blinking : 11
+I (14073) example: Execution time of LED blink function in milli seconds: 0ms
+I (15073) example: Frequency with LED is blinking : 9
+I (15883) example: Execution time of LED blink function in milli seconds: 810ms
+I (16883) example: Frequency with LED is blinking : 9
+I (17693) example: Execution time of LED blink function in milli seconds: 810ms
+I (18693) example: Frequency with LED is blinking : 10
+I (19693) example: Execution time of LED blink function in milli seconds: 1000ms
+I (20693) example: Frequency with LED is blinking : 11
+I (20693) example: Execution time of LED blink function in milli seconds: 0ms
+I (21693) example: Frequency with LED is blinking : 11
+I (21693) example: Execution time of LED blink function in milli seconds: 0ms
+I (22693) example: Frequency with LED is blinking : 11
+I (22693) example: Execution time of LED blink function in milli seconds: 0ms
+I (23693) example: Frequency with LED is blinking : 9
+I (24503) example: Execution time of LED blink function in milli seconds: 810ms
+I (25503) example: Frequency with LED is blinking : 9
+I (26313) example: Execution time of LED blink function in milli seconds: 810ms
+I (27313) example: Frequency with LED is blinking : 10
+I (28313) example: Execution time of LED blink function in milli seconds: 1000ms
+I (29313) example: Frequency with LED is blinking : 10
+I (30313) example: Execution time of LED blink function in milli seconds: 1000ms
+I (31313) example: Frequency with LED is blinking : 10
+I (32313) example: Execution time of LED blink function in milli seconds: 1000ms
+I (33313) example: Frequency with LED is blinking : 11
+I (33313) example: Execution time of LED blink function in milli seconds: 0ms
+I (34313) example: Frequency with LED is blinking : 10
+I (35313) example: Execution time of LED blink function in milli seconds: 1000ms
+I (36313) example: Frequency with LED is blinking : 11
+I (36313) example: Execution time of LED blink function in milli seconds: 0ms
+I (37313) example: Frequency with LED is blinking : 11
+I (37313) example: Execution time of LED blink function in milli seconds: 0ms
+I (38313) example: Frequency with LED is blinking : 11
+I (38313) example: Execution time of LED blink function in milli seconds: 0ms
+```
+---
+
+---
+## Time profiling for vcolrChngCallback() function
+
+```
+I (342) main_task: Returned from app_main()
+I (1442) example: RGB pixel values are : Red 255 Green 238 Blue 18 
+I (1442) example: Execution time in micro seconds: 742us
+I (2442) example: RGB pixel values are : Red 255 Green 241 Blue 15 
+I (2442) example: Execution time in micro seconds: 603us
+I (3442) example: RGB pixel values are : Red 255 Green 241 Blue 15 
+I (3442) example: Execution time in micro seconds: 598us
+I (4442) example: RGB pixel values are : Red 255 Green 241 Blue 15 
+I (4442) example: Execution time in micro seconds: 598us
+I (5442) example: RGB pixel values are : Red 255 Green 241 Blue 15 
+I (5442) example: Execution time in micro seconds: 598us
+I (6442) example: RGB pixel values are : Red 255 Green 241 Blue 15 
+I (6442) example: Execution time in micro seconds: 598us
+I (7442) example: RGB pixel values are : Red 255 Green 241 Blue 15 
+I (7442) example: Execution time in micro seconds: 598us
+I (8442) example: RGB pixel values are : Red 255 Green 240 Blue 16 
+I (8442) example: Execution time in micro seconds: 598us
+I (9442) example: RGB pixel values are : Red 255 Green 240 Blue 16 
+I (9442) example: Execution time in micro seconds: 598us
+I (10442) example: RGB pixel values are : Red 255 Green 240 Blue 16 
+I (10442) example: Execution time in micro seconds: 601us
+I (11442) example: RGB pixel values are : Red 255 Green 240 Blue 16 
+I (11442) example: Execution time in micro seconds: 601us
+I (12442) example: RGB pixel values are : Red 255 Green 240 Blue 16 
+I (12442) example: Execution time in micro seconds: 601us
+I (13442) example: RGB pixel values are : Red 255 Green 245 Blue 11 
+I (13442) example: Execution time in micro seconds: 601us
+I (14442) example: RGB pixel values are : Red 67 Green 189 Blue 1 
+I (14442) example: Execution time in micro seconds: 596us
+I (15442) example: RGB pixel values are : Red 76 Green 180 Blue 1 
+I (15442) example: Execution time in micro seconds: 594us
+I (16442) example: RGB pixel values are : Red 137 Green 119 Blue 1 
+I (16442) example: Execution time in micro seconds: 597us
+I (17442) example: RGB pixel values are : Red 175 Green 81 Blue 1 
+I (17442) example: Execution time in micro seconds: 594us
+I (18442) example: RGB pixel values are : Red 206 Green 50 Blue 1 
+I (18442) example: Execution time in micro seconds: 594us
+I (19442) example: RGB pixel values are : Red 249 Green 7 Blue 1 
+I (19442) example: Execution time in micro seconds: 590us
+I (20442) example: RGB pixel values are : Red 256 Green 0 Blue 1 
+```
+---
+
+
 ---
 ### Creation of Project
 ```
