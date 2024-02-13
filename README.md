@@ -33,6 +33,8 @@ I (24912) example: Frequency with LED is blinking : 3
 
 ## Output for color change for LED with different voltage values
 
+**#define COLOR_CHANGE TRUE** - uncomment this (26) line in LEDPotCtrl.c file to execute this functionality.
+
 ```
 I (322) gpio: GPIO[48]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 
 I (332) EXAMPLE: calibration scheme version is Curve Fitting
