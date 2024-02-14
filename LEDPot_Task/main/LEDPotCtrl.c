@@ -22,7 +22,7 @@ and color change depending upon frequency
 #include "read_ADC.h" 
 #define PERIOD_MS 100
 // to use blinking LED with frequencies
-#define COLOR_CHANGE TRUE
+//#define COLOR_CHANGE TRUE
 
 static const char *TAG         = "example";
 static int voltage             = 0;
@@ -73,18 +73,17 @@ static void blink_LED(void){
 
     //ESP_LOGI(TAG, "Voltage in ms : %d", voltage);
 
-    normalizeFactor = 1 + (voltage / 100); //normalized value between 0-9 (10 values), and avoided "0" by adding 1 to it.
+    normalizeFactor = (voltage / 96);      //normalized value between 0-10 (11 values)
     
-    if(normalizeFactor == 10){
-        on_led();                          //here, Frequency = 0; with normalized value = 10 :: LED will remain On!
+    if(normalizeFactor == 0){
+        on_led();                          //here, Frequency = 0; LED will remain On!
     }
     else{
         //Toggle the LED state
         on_led();
-        vTaskDelay(normalizeFactor*xDelay); // blink_LED execution time = [0ms, ~90ms] 
+        vTaskDelay((10-normalizeFactor)*xDelay); // blink_LED execution time = [0ms, ~90ms] 
         off_led();
     }
-    normalizeFactor = 10 - normalizeFactor; //readable to user
     ESP_LOGI(TAG, "Frequency with LED is blinking : %d", normalizeFactor);
     
 }
@@ -131,7 +130,7 @@ static void vcolrChngCallback(){
     //end_time = esp_timer_get_time();
     //start_time = esp_timer_get_time();
     //color change method
-    normalizeFactor = (voltage / 100);
+    normalizeFactor = (voltage / 96);
     chngLEDcolr(&normalizeFactor);               //execution time for color change function ~ 360us
 
     //end_time = esp_timer_get_time();
