@@ -25,7 +25,7 @@ static uint16_t rLED, gLED, bLED;
 
 void chngLEDcolr(uint8_t *pVColor){
 
-    switch (*pVColor)
+    switch (*pVColor)   // *pVcolor values[0,9]
     {
     case 0:
         rLED = 255;

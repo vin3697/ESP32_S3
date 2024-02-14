@@ -1,8 +1,7 @@
 /*
 
-here is implementation of blinking of LED w.r.t Voltage (Potentiometer Value)
-and color change depending upon Potentiometer
-
+here is implementation of blinking of LED
+and color change depending upon frequency
 
 */
 
@@ -23,7 +22,7 @@ and color change depending upon Potentiometer
 #include "read_ADC.h" 
 #define PERIOD_MS 100
 // to use blinking LED with frequencies
-//#define COLOR_CHANGE TRUE
+#define COLOR_CHANGE TRUE
 
 static const char *TAG         = "example";
 static int voltage             = 0;
@@ -35,7 +34,7 @@ static int execution_time_ms = 0;
 static int execution_time_us = 0;
 */
 
-const TickType_t xDelay  = CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS; //delay of 10ms :: xDelay = 10 / portTICK_PERIOD_MS; || define response_time (pdMS_TO_TICKS(100)) :: 100ms to ticks  
+const TickType_t xDelay  = CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS; //delay of 10ms
 
 //declarations of functions
 static void blink_LED(void);
@@ -68,27 +67,21 @@ void app_main(void)
         vLEDFreqTimerSetup();
     #endif
     
-    // Starting the scheduler will start the timers running as they have already
-    // been set into the active state.
-    //vTaskStartScheduler(); 
-
 }
 
 static void blink_LED(void){
 
     //ESP_LOGI(TAG, "Voltage in ms : %d", voltage);
-    normalizeFactor = 1 + (voltage / 100); //normalize value between 0-9 (10 values), and avoided "0" by adding 1
+
+    normalizeFactor = 1 + (voltage / 100); //normalized value between 0-9 (10 values), and avoided "0" by adding 1 to it.
     
     if(normalizeFactor == 10){
-        on_led();                      //for Freq. 0 LED will remain On!
+        on_led();                          //here, Frequency = 0; with normalized value = 10 :: LED will remain On!
     }
     else{
         //Toggle the LED state
         on_led();
-        vTaskDelay(normalizeFactor*xDelay); // !delay ~100ms ||with normalizeFactor*normalizeFactor*xDelay 1000ms
-        /*
-            with above delay of (normalizeFactor*xDelay) - execution time of blink function is [0ms, 100ms]
-        */
+        vTaskDelay(normalizeFactor*xDelay); // blink_LED execution time = [0ms, ~90ms] 
         off_led();
     }
     normalizeFactor = 10 - normalizeFactor; //readable to user
@@ -97,18 +90,18 @@ static void blink_LED(void){
 }
 
 /*
-                             Below is LED color change software timer implementation
+                             below is LED color change software timer implementation
 */
 
 static void vcolrChngTimerSetup(){
 
-    // Create then start the Auto-reload timer that is responsible for
-    // blinking the LED with different frequencies.
+    // create then start the auto-reload timer that is responsible for
+    // changing the LED color with different frequencies.
     xcolrChngTimer = xTimerCreate( "colrChngTimer",               // Just a text name, not used by the kernel.
-                                    pdMS_TO_TICKS(PERIOD_MS),     // The timer period in milliSecs. 100ms
-                                    pdTRUE,                       // The timer is a Auto Reload timer which make the task periodic in nature.
-                                    0,                            // The id is not used by the callback so can take any value.
-                                    vcolrChngCallback             // The callback function that changes the color of LED w.r.t voltage.
+                                    pdMS_TO_TICKS(PERIOD_MS),     // timer period = 100milliSecs, as response time has to be 100ms
+                                    pdTRUE,                       // timer is a Auto Reload timer which make the task periodic in nature.
+                                    0,                            // id is not used by the callback so can take any value.
+                                    vcolrChngCallback             // callback function that changes the color of LED w.r.t voltage.
                                 );
 
     if( xcolrChngTimer == NULL )
@@ -118,9 +111,7 @@ static void vcolrChngTimerSetup(){
     }
     else
     {
-        // Start the timer.  No block time is specified, and even if one was
-        // it would be ignored because the scheduler has not yet been
-        // started.
+        // start the timer.  No block time is specified.
         if( xTimerStart( xcolrChngTimer, 0 ) != pdPASS ) // xTimerStart(xTimer, xTicksToWait)
         {
             // The timer could not be set into the Active state.
@@ -141,7 +132,7 @@ static void vcolrChngCallback(){
     //start_time = esp_timer_get_time();
     //color change method
     normalizeFactor = (voltage / 100);
-    chngLEDcolr(&normalizeFactor);               //this color change function takes ~ 598us
+    chngLEDcolr(&normalizeFactor);               //execution time for color change function ~ 360us
 
     //end_time = esp_timer_get_time();
     //execution_time_us = (end_time - start_time);
@@ -151,18 +142,18 @@ static void vcolrChngCallback(){
 }
 
 /*
-                             Below is Blink LED Freq software timer implementation
+                             below is Blink LED Freq software timer implementation
 */
 
 static void vLEDFreqTimerSetup(){
 
-    // Create then start the Auto-reload timer that is responsible for
+    // create then start the auto-reload timer that is responsible for
     // blinking the LED with different frequencies.
     xLEDblinkFreqTimer = xTimerCreate( "LEDblinkTimer",           // Just a text name, not used by the kernel.
-                                    pdMS_TO_TICKS(PERIOD_MS),     // The timer period in milliSecs. 100ms is the time period!
-                                    pdTRUE,                       // The timer is a auto reload timer.
-                                    0,                            // The id is not used by the callback so can take any value.
-                                    vLEDfreqTimerCallback         // The callback function that blinks LED w.r.t Freq.
+                                    pdMS_TO_TICKS(PERIOD_MS),     // timer period = 100milliSecs, as response time has to be 100ms
+                                    pdTRUE,                       // timer is a auto reload timer.
+                                    0,                            // id is not used by the callback so can take any value.
+                                    vLEDfreqTimerCallback         // callback function that blinks LED w.r.t Freq.
                                 );
 
     if( xLEDblinkFreqTimer == NULL )
@@ -172,9 +163,7 @@ static void vLEDFreqTimerSetup(){
     }
     else
     {
-        // Start the timer.  No block time is specified, and even if one was
-        // it would be ignored because the scheduler has not yet been
-        // started.
+        // Start the timer.  No block time is specified.
         if( xTimerStart( xLEDblinkFreqTimer, 0 ) != pdPASS ) // xTimerStart(xTimer, xTicksToWait)
         {
             // The timer could not be set into the Active state.
@@ -190,23 +179,12 @@ static void vLEDfreqTimerCallback( TimerHandle_t pxTimer )
 
     
     //get voltage from ADC
-    voltage = read_adc();          //this reading of voltage function takes ~38us for its own execution
+    voltage = read_adc();          //voltage function takes ~38us for its execution
     
     //start_time = esp_timer_get_time();
     
     //blink freq with Pot
-    blink_LED();                   //this blinking function takes [0ms-1000ms] for its execution
-
-    /*
-
-    if I need a response time of 100ms w.r.t change in potentiometer value,
-    1. I have to consider only a particular range from potentiometer and map it to [0-9] frequencies.
-    2. so that its possible to have a max delay of 100ms and min of 10ms, but the speed at which execution
-       is performed it hardly possible to notice by eyes!
-    3. I might need to consider only RAW values from read_ADC and not actual voltage values. 
-
-    SOLUTION : reduced the execution time of blinkLED method to 100ms.
-    */
+    blink_LED();                   //blinking function [0ms-1000ms] for its execution
 
     //end_time = esp_timer_get_time();
     //execution_time_ms = (end_time - start_time);
