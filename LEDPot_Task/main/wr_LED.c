@@ -23,28 +23,74 @@ static led_strip_handle_t led_strip;
 static uint16_t rLED, gLED, bLED; 
 
 
-void chngLEDcolr(int *pVColor){
+void chngLEDcolr(uint8_t *pVColor){
 
-    if(*pVColor < 329){
-        *pVColor = (*pVColor*3)/4;
-        //ESP_LOGI(TAG, "Color blinking_LED %d", *pVColor);
-        rLED = 256 - *pVColor;
-        gLED = *pVColor;
-        bLED = 1;
-    }
-    else if(*pVColor < 658){
-        *pVColor = ((*pVColor - 329)*3)/4;
-        //ESP_LOGI(TAG, "Color blinking_LED %d", *pVColor);
-        rLED = *pVColor;
-        gLED = 255;
-        bLED = 256 - *pVColor;
-    }
-    else{
-        *pVColor = ((*pVColor-658)*3)/4;
+    switch (*pVColor)
+    {
+    case 0:
         rLED = 255;
-        gLED = *pVColor;
-        bLED = 256 - *pVColor;     
+        gLED = 0;
+        bLED = 0;   //red
+        break;
+    
+    case 1:
+        rLED = 0;
+        gLED = 255;
+        bLED = 0;   //green
+        break;
+
+    case 2:
+        rLED = 255;
+        gLED = 255;
+        bLED = 0;   //yellow
+        break;
+
+    case 3:
+        rLED = 255;
+        gLED = 0;
+        bLED = 255; //magenta
+        break;
+
+    case 4:
+        rLED = 0;
+        gLED = 255;
+        bLED = 255;  //cyan
+        break;
+
+    case 5:
+        rLED = 128;
+        gLED = 0;
+        bLED =  128; //purple
+        break;
+
+    case 6:
+        rLED = 255;
+        gLED = 165;
+        bLED = 0; //orange
+        break;
+
+    case 7:
+        rLED = 255;
+        gLED = 192;
+        bLED = 203; //pink
+        break;
+    case 8:
+        rLED = 0;
+        gLED = 128;
+        bLED = 0;  //dark-green
+        break;
+    case 9:
+        rLED = 255;
+        gLED = 140;
+        bLED = 0;  //orange-red
+        break;
+    default:
+        rLED = 255;
+        gLED = 255;
+        bLED = 255;
+        break;
     }
+    //ESP_LOGI(TAG, "Normalized value of voltage : %d", *pVColor);
     ESP_LOGI(TAG, "RGB pixel values are : Red %d Green %d Blue %d ", rLED, gLED, bLED);
     led_strip_set_pixel(led_strip, 0, rLED, gLED, bLED);
     led_strip_refresh(led_strip);
