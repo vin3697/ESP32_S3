@@ -1,30 +1,38 @@
 ## Output for LED blinking for 10 different frequencies.
 
 ```
-I (6442) example: Frequency with LED is blinking : 0
-I (6542) example: Frequency with LED is blinking : 0
-I (6642) example: Frequency with LED is blinking : 0
-I (6832) example: Frequency with LED is blinking : 1
-I (7022) example: Frequency with LED is blinking : 2
-I (7122) example: Frequency with LED is blinking : 2
-I (7222) example: Frequency with LED is blinking : 2
-I (7322) example: Frequency with LED is blinking : 2
-I (7412) example: Frequency with LED is blinking : 3
-I (7512) example: Frequency with LED is blinking : 3
-I (7602) example: Frequency with LED is blinking : 4
-I (7702) example: Frequency with LED is blinking : 4
-I (7792) example: Frequency with LED is blinking : 5
-I (7882) example: Frequency with LED is blinking : 6
-I (7972) example: Frequency with LED is blinking : 7
-I (8072) example: Frequency with LED is blinking : 7
-I (8172) example: Frequency with LED is blinking : 7
-I (8272) example: Frequency with LED is blinking : 7
-I (8372) example: Frequency with LED is blinking : 7
-I (8462) example: Frequency with LED is blinking : 8
-I (8762) example: Frequency with LED is blinking : 8
-I (8862) example: Frequency with LED is blinking : 8
-I (8952) example: Frequency with LED is blinking : 9
-I (9052) example: Frequency with LED is blinking : 9
+I (11441) example: Frequency with LED is blinking : 0
+I (11541) example: Frequency with LED is blinking : 0
+I (11941) example: Frequency with LED is blinking : 0
+I (12131) example: Frequency with LED is blinking : 1
+I (12231) example: Frequency with LED is blinking : 1
+I (12331) example: Frequency with LED is blinking : 1
+I (13221) example: Frequency with LED is blinking : 2
+I (14221) example: Frequency with LED is blinking : 2
+I (14321) example: Frequency with LED is blinking : 2
+I (14411) example: Frequency with LED is blinking : 3
+I (14511) example: Frequency with LED is blinking : 3
+I (14911) example: Frequency with LED is blinking : 3
+I (15101) example: Frequency with LED is blinking : 4
+I (15201) example: Frequency with LED is blinking : 4
+I (15291) example: Frequency with LED is blinking : 5
+I (15391) example: Frequency with LED is blinking : 5
+I (15991) example: Frequency with LED is blinking : 5
+I (16091) example: Frequency with LED is blinking : 5
+I (16191) example: Frequency with LED is blinking : 5
+I (16281) example: Frequency with LED is blinking : 6
+I (16881) example: Frequency with LED is blinking : 6
+I (16981) example: Frequency with LED is blinking : 6
+I (17071) example: Frequency with LED is blinking : 7
+I (17171) example: Frequency with LED is blinking : 7
+I (17271) example: Frequency with LED is blinking : 7
+I (17361) example: Frequency with LED is blinking : 8
+I (17461) example: Frequency with LED is blinking : 8
+I (17661) example: Frequency with LED is blinking : 8
+I (18151) example: Frequency with LED is blinking : 9
+I (18251) example: Frequency with LED is blinking : 9
+I (18841) example: Frequency with LED is blinking : 10
+I (18941) example: Frequency with LED is blinking : 10
 ```
 
 ---
