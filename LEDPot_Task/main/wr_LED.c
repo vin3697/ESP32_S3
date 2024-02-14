@@ -84,6 +84,11 @@ void chngLEDcolr(uint8_t *pVColor){
         gLED = 140;
         bLED = 0;  //orange-red
         break;
+    case 10:
+        rLED = 0;
+        gLED = 255;
+        bLED = 125;  //turquoise
+        break;
     default:
         rLED = 255;
         gLED = 255;
