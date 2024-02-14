@@ -1,4 +1,4 @@
-## Output for LED blinking for 10 different frequencies.
+## Output for LED blinking for 11 different frequencies.
 
 ```
 I (11441) example: Frequency with LED is blinking : 0
@@ -37,7 +37,7 @@ I (18941) example: Frequency with LED is blinking : 10
 
 ---
 
-## Output for LED color change - 10 frequencies. 
+## Output for LED color change - 11 frequencies. 
 
 **#define COLOR_CHANGE TRUE** - uncomment line number 26, in LEDPotCtrl.c file to execute this functionality.
 
