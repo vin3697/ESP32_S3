@@ -25,9 +25,9 @@ and color change depending upon Potentiometer
 // to use blinking LED with frequencies
 //#define COLOR_CHANGE TRUE
 
-static const char *TAG   = "example";
-static int voltage   = 0;
-
+static const char *TAG         = "example";
+static int voltage             = 0;
+static uint8_t normalizeFactor = 0;
 /*
 static int start_time        = 0;
 static int end_time          = 0;
@@ -77,22 +77,22 @@ void app_main(void)
 static void blink_LED(void){
 
     //ESP_LOGI(TAG, "Voltage in ms : %d", voltage);
-    voltage = voltage / 89;            //normalize value between 0-11
-
-    ESP_LOGI(TAG, "Frequency with LED is blinking : %d", voltage);
-
-    if(voltage == 11){
-        on_led();                      //for Freq. 11 LED will remain On!
+    normalizeFactor = 1 + (voltage / 100); //normalize value between 0-9 (10 values), and avoided "0" by adding 1
+    
+    if(normalizeFactor == 10){
+        on_led();                      //for Freq. 0 LED will remain On!
     }
     else{
         //Toggle the LED state
         on_led();
-        vTaskDelay(voltage*xDelay); // !delay ~100ms ||with voltage*voltage*xDelay 1000ms
+        vTaskDelay(normalizeFactor*xDelay); // !delay ~100ms ||with normalizeFactor*normalizeFactor*xDelay 1000ms
         /*
-            with above delay of (voltage*xDelay) - execution time of blink function is [0ms, 100ms]
+            with above delay of (normalizeFactor*xDelay) - execution time of blink function is [0ms, 100ms]
         */
         off_led();
     }
+    normalizeFactor = 10 - normalizeFactor; //readable to user
+    ESP_LOGI(TAG, "Frequency with LED is blinking : %d", normalizeFactor);
     
 }
 
@@ -140,8 +140,8 @@ static void vcolrChngCallback(){
     //end_time = esp_timer_get_time();
     //start_time = esp_timer_get_time();
     //color change method
-
-    chngLEDcolr(&voltage);               //this color change function takes ~ 598us
+    normalizeFactor = (voltage / 100);
+    chngLEDcolr(&normalizeFactor);               //this color change function takes ~ 598us
 
     //end_time = esp_timer_get_time();
     //execution_time_us = (end_time - start_time);
