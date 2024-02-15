@@ -81,7 +81,7 @@ static void blink_LED(void){
     else{
         //Toggle the LED state
         on_led();
-        vTaskDelay((10-normalizeFactor)*xDelay); // blink_LED execution time = [0ms, ~90ms] 
+        vTaskDelay((11-normalizeFactor)*xDelay); // blink_LED execution time = [0ms, ~97ms] 
         off_led();
     }
     ESP_LOGI(TAG, "Frequency with LED is blinking : %d", normalizeFactor);
@@ -183,7 +183,7 @@ static void vLEDfreqTimerCallback( TimerHandle_t pxTimer )
     //start_time = esp_timer_get_time();
     
     //blink freq with Pot
-    blink_LED();                   //blinking function [0ms-1000ms] for its execution
+    blink_LED();                   //blinking function [0ms-97ms] for its execution
 
     //end_time = esp_timer_get_time();
     //execution_time_ms = (end_time - start_time);

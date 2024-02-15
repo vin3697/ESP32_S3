@@ -75,39 +75,78 @@ I (1942) example: Execution time in micro seconds: 38us
 
 ---
 ## Time profiling for blink_LED() function with delay :: vTaskDelay(voltage*xDelay)
-### Max. Delay is 90ms and Min. is 0ms
+### Max. Delay is 97ms and Min. is 0ms
 ```
-I (37642) example: Execution time of LED blink function in milli seconds: 0ms
-I (37742) example: Execution time of LED blink function in milli seconds: 0ms
-I (37842) example: Execution time of LED blink function in milli seconds: 0ms
-I (37942) example: Execution time of LED blink function in milli seconds: 0ms
-I (38042) example: Execution time of LED blink function in milli seconds: 0ms
-I (38232) example: Execution time of LED blink function in milli seconds: 90ms
-I (38332) example: Execution time of LED blink function in milli seconds: 90ms
-I (38422) example: Execution time of LED blink function in milli seconds: 80ms
-I (38522) example: Execution time of LED blink function in milli seconds: 80ms
-I (38622) example: Execution time of LED blink function in milli seconds: 80ms
-I (38712) example: Execution time of LED blink function in milli seconds: 70ms
-I (38812) example: Execution time of LED blink function in milli seconds: 70ms
-I (38902) example: Execution time of LED blink function in milli seconds: 60ms
-I (39002) example: Execution time of LED blink function in milli seconds: 60ms
-I (39092) example: Execution time of LED blink function in milli seconds: 50ms
-I (39182) example: Execution time of LED blink function in milli seconds: 40ms
-I (39282) example: Execution time of LED blink function in milli seconds: 40ms
-I (39382) example: Execution time of LED blink function in milli seconds: 40ms
-I (39482) example: Execution time of LED blink function in milli seconds: 40ms
-I (39582) example: Execution time of LED blink function in milli seconds: 40ms
-I (39672) example: Execution time of LED blink function in milli seconds: 30ms
-I (39772) example: Execution time of LED blink function in milli seconds: 30ms
-I (39872) example: Execution time of LED blink function in milli seconds: 30ms
-I (39972) example: Execution time of LED blink function in milli seconds: 30ms
-I (40062) example: Execution time of LED blink function in milli seconds: 20ms
-I (40162) example: Execution time of LED blink function in milli seconds: 20ms
-I (40262) example: Execution time of LED blink function in milli seconds: 20ms
-I (40362) example: Execution time of LED blink function in milli seconds: 20ms
-I (40462) example: Execution time of LED blink function in milli seconds: 20ms
-I (40562) example: Execution time of LED blink function in milli seconds: 20ms
-I (40652) example: Execution time of LED blink function in milli seconds: 10ms
+I (5143) example: Frequency with LED is blinking : 1
+I (5143) example: Execution time of LED blink function in milli seconds: 97ms
+I (5243) example: Frequency with LED is blinking : 1
+I (5243) example: Execution time of LED blink function in milli seconds: 97ms
+I (5343) example: Frequency with LED is blinking : 1
+I (6043) example: Execution time of LED blink function in milli seconds: 97ms
+I (6143) example: Frequency with LED is blinking : 1
+I (6433) example: Execution time of LED blink function in milli seconds: 87ms
+I (6533) example: Frequency with LED is blinking : 2
+I (6533) example: Execution time of LED blink function in milli seconds: 90ms
+I (6633) example: Frequency with LED is blinking : 2
+I (6633) example: Execution time of LED blink function in milli seconds: 90ms
+I (6733) example: Frequency with LED is blinking : 2
+I (6733) example: Execution time of LED blink function in milli seconds: 90ms
+I (6833) example: Frequency with LED is blinking : 2
+I (6833) example: Execution time of LED blink function in milli seconds: 90ms
+I (6933) example: Frequency with LED is blinking : 2
+I (6933) example: Execution time of LED blink function in milli seconds: 90ms
+I (7033) example: Frequency with LED is blinking : 2
+I (7033) example: Execution time of LED blink function in milli seconds: 90ms
+I (7133) example: Frequency with LED is blinking : 2
+I (7133) example: Execution time of LED blink function in milli seconds: 90ms
+I (7633) example: Frequency with LED is blinking : 2
+I (7633) example: Execution time of LED blink function in milli seconds: 90ms
+I (7723) example: Frequency with LED is blinking : 3
+I (7723) example: Execution time of LED blink function in milli seconds: 80ms
+I (7823) example: Frequency with LED is blinking : 3
+I (7823) example: Execution time of LED blink function in milli seconds: 80ms
+I (7923) example: Frequency with LED is blinking : 3
+I (8123) example: Execution time of LED blink function in milli seconds: 80ms
+I (8423) example: Frequency with LED is blinking : 3
+I (8423) example: Execution time of LED blink function in milli seconds: 80ms
+I (8513) example: Frequency with LED is blinking : 4
+I (8513) example: Execution time of LED blink function in milli seconds: 70ms
+I (8613) example: Frequency with LED is blinking : 4
+I (8613) example: Execution time of LED blink function in milli seconds: 70ms
+I (8713) example: Frequency with LED is blinking : 4
+I (8713) example: Execution time of LED blink function in milli seconds: 70ms
+I (8803) example: Frequency with LED is blinking : 5
+I (8803) example: Execution time of LED blink function in milli seconds: 60ms
+I (8903) example: Frequency with LED is blinking : 5
+I (8903) example: Execution time of LED blink function in milli seconds: 60ms
+I (9003) example: Frequency with LED is blinking : 5
+I (9003) example: Execution time of LED blink function in milli seconds: 60ms
+I (9103) example: Frequency with LED is blinking : 5
+I (9103) example: Execution time of LED blink function in milli seconds: 60ms
+I (9193) example: Frequency with LED is blinking : 6
+I (9193) example: Execution time of LED blink function in milli seconds: 50ms
+I (9283) example: Frequency with LED is blinking : 7
+I (9283) example: Execution time of LED blink function in milli seconds: 40ms
+I (9383) example: Frequency with LED is blinking : 7
+I (9383) example: Execution time of LED blink function in milli seconds: 40ms
+I (9483) example: Frequency with LED is blinking : 7
+I (9483) example: Execution time of LED blink function in milli seconds: 40ms
+I (9583) example: Frequency with LED is blinking : 7
+I (9583) example: Execution time of LED blink function in milli seconds: 40ms
+I (9673) example: Frequency with LED is blinking : 8
+I (9673) example: Execution time of LED blink function in milli seconds: 30ms
+I (9773) example: Frequency with LED is blinking : 8
+I (9773) example: Execution time of LED blink function in milli seconds: 30ms
+I (9873) example: Frequency with LED is blinking : 8
+I (9873) example: Execution time of LED blink function in milli seconds: 30ms
+I (9963) example: Frequency with LED is blinking : 9
+I (10263) example: Frequency with LED is blinking : 9
+I (10263) example: Execution time of LED blink function in milli seconds: 20ms
+I (10353) example: Frequency with LED is blinking : 10
+I (10353) example: Execution time of LED blink function in milli seconds: 10ms
+I (10453) example: Frequency with LED is blinking : 10
+I (10453) example: Execution time of LED blink function in milli seconds: 10ms
+I (10553) example: Frequency with LED is blinking : 10
 ```
 
 ---
