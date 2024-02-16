@@ -75,6 +75,16 @@ static void blink_LED(void){
 
     normalizeFactor = (voltage / 96);      //normalized value between 0-10 (11 values)
     
+    /*
+    normalizeFactor = 10 LED off
+    normalizeFactor = 0  LED On
+    */
+    on_led();
+    vTaskDelay((10-normalizeFactor)*xDelay); // blink_LED execution time = [0ms, ~97ms] 
+    off_led();
+    
+    
+    /*
     if(normalizeFactor == 0){
         on_led();                          //here, Frequency = 0; LED will remain On!
     }
@@ -83,7 +93,7 @@ static void blink_LED(void){
         on_led();
         vTaskDelay((11-normalizeFactor)*xDelay); // blink_LED execution time = [0ms, ~97ms] 
         off_led();
-    }
+    }*/
     ESP_LOGI(TAG, "Frequency with LED is blinking : %d", normalizeFactor);
     
 }
