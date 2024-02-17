@@ -1,3 +1,99 @@
+
+## Creation of Project
+```
+// creation of the project
+- idf.py create-project -p . <name_of_project>			
+  eg: idf.py create-project -p . blinking_LED
+
+```
+
+PORT NAME
+```
+// detect and get the USB port 
+lsusb
+dmesg | grep tty
+
+PORT = /dev/ttyUSB0
+
+```
+
+## Linking of Modules (.c and .h files)
+```
+- CMakeLists.txt (important changes : include libraries and linked the C files)
+  /ESP32_S3/LEDPot_Task/main/CMakeLists.txt
+```
+
+## Build and Flash
+```
+// get the IDF environment
+- get_idf
+
+// configuration of Environment
+- idf.py set-target esp32s3 
+- idf.py menuconfig
+
+// Build the Project
+- idf.py build
+
+// Flash the application on Target
+- idf.py -p /dev/ttyUSB0 flash
+- idf.py monitor              
+                  OR 
+- idf.py -p /dev/ttyUSB0 flash monitor
+
+```
+
+## LEDPotCtrl.c
+
+The file has two functionalities :
+
+1. Blinking the LED with 11 frequencies
+2. Changing the color depending upon these 11 frequencies.
+
+and its controlled with the help of COLOR_CHANGE macro defined at line 26 in LEDPotCtrl.c file located at "LEDPot_Task/main/LEDPotCtrl.c "
+
+# References
+#### Blink LED - [example](https://components.espressif.com/components/espressif/led_strip) : GPIO48
+
+```
+//Add this component to your project, run:
+
+idf.py add-dependency "espressif/led_strip^2.5.3"
+ESP-IDF >=4.4
+
+//Create the project
+
+idf.py create-project-from-example "espressif/led_strip^2.5.3:led_strip_rmt_ws2812"
+```
+---
+
+#### ADC : GPIO3 [API reference](https://docs.espressif.com/projects/esp-idf/en/v4.4.3/esp32s3/api-reference/peripherals/adc.html)
+| Attenuation| Measurable input voltage range |
+|----------|----------|
+| ADC1_CHANNEL_2 | GPIO3|
+| ADC_ATTEN_DB_2_5 | 0 mV ~ 1250 mV|
+
+```
+#ADC1
+
+10 channels: GPIO1 - GPIO10
+
+ADC1_CHANNEL_2 -> ADC1 channel 2 is GPIO3
+
+Formula to calculate Vout = Dout * Vmax / Dmax (Not used)
+
+```
+
+# [Issues Link](https://github.com/vin3697/ESP32_S3/issues)
+* https://esp32.com/viewtopic.php?t=1459
+```
+idf.py menuconfig
+
+Component config -> FreeRTOS -> Kernel -> configTIMER_TASK_STACK_DEPTH
+configTIMER_TASK_STACK_DEPTH = changed to 16384 
+
+```
+
 ## Output for LED blinking for 11 different frequencies.
 
 ```
@@ -35,11 +131,10 @@ I (18841) example: Frequency with LED is blinking : 10
 I (18941) example: Frequency with LED is blinking : 10
 ```
 
----
 
 ## Output for LED color change - 11 frequencies. 
 
-**#define COLOR_CHANGE TRUE** - uncomment line number 26, in LEDPotCtrl.c file to execute this functionality.
+**#define COLOR_CHANGE TRUE** - uncomment line number 28, in LEDPotCtrl.c file to execute this functionality.
 
 ```
 I (6042) example: RGB pixel values are : Red 255 Green 140 Blue 0 
@@ -58,7 +153,7 @@ I (7342) example: RGB pixel values are : Red 255 Green 0 Blue 255
 I (7442) example: RGB pixel values are : Red 255 Green 0 Blue 255 
 ```
 
----
+
 ## Time profiling for read_adc() function.
 
 ```
@@ -71,11 +166,8 @@ I (1742) example: Execution time in micro seconds: 38us
 I (1842) example: Execution time in micro seconds: 38us
 I (1942) example: Execution time in micro seconds: 38us
 ```
----
 
----
-## Time profiling for blink_LED() function with delay :: vTaskDelay(voltage*xDelay)
-### Max. Delay is 97ms and Min. is 0ms
+## Time profiling for blink_LED() function with delay :: vTaskDelay(voltage*xDelay) || Max. Delay is 97ms and Min. is 0ms ||
 ```
 I (5143) example: Frequency with LED is blinking : 1
 I (5143) example: Execution time of LED blink function in milli seconds: 97ms
@@ -149,9 +241,9 @@ I (10453) example: Execution time of LED blink function in milli seconds: 10ms
 I (10553) example: Frequency with LED is blinking : 10
 ```
 
----
 ## Time profiling for chngLEDcolr() function.
 
+#### Using Switch Case
 ```
 I (1442) example: Execution time in micro seconds: 362us
 I (1542) example: Execution time in micro seconds: 359us
@@ -160,83 +252,18 @@ I (1742) example: Execution time in micro seconds: 359us
 I (1842) example: Execution time in micro seconds: 362us
 I (1942) example: Execution time in micro seconds: 359us
 ```
----
 
-
----
-### Creation of Project
+#### Using Array of Structures
 ```
-- idf.py create-project -p . <name_of_project>			
-  eg: idf.py create-project -p . blinking_LED
-
-- idf.py menuconfig
-
-- CmakeLists (Make the important changes : Include Libraries and Link the C files)
-  /home/user/ESP32_S3/ESP32_S3/project_folder/main/CMakeLists.txt
-```
-PORT NAME
-```
-lsusb
-dmesg | grep tty
-
-PORT = /dev/ttyUSB0
-
+I (54542) example: Execution time in micro seconds: 364us
+I (54642) example: Execution time in micro seconds: 364us
+I (54742) example: Execution time in micro seconds: 364us
+I (54842) example: Execution time in micro seconds: 364us
+I (54942) example: Execution time in micro seconds: 364us
+I (55042) example: Execution time in micro seconds: 364us
+I (55142) example: Execution time in micro seconds: 364us
 ```
 ---
-### Build and Flash
-```
-- get_idf
-- idf.py set-target esp32s3 
-- idf.py menuconfig
-- idf.py build
-- idf.py -p /dev/ttyUSB0 flash monitor
-- idf.py monitor             
-```
-
----
-
-#### Blink LED - [example](https://components.espressif.com/components/espressif/led_strip) : GPIO48
-
-```
-//Add this component to your project, run:
-
-idf.py add-dependency "espressif/led_strip^2.5.3"
-ESP-IDF >=4.4
-
-//Create the project
-
-idf.py create-project-from-example "espressif/led_strip^2.5.3:led_strip_rmt_ws2812"
-```
----
-
-#### ADC : GPIO3 [API reference](https://docs.espressif.com/projects/esp-idf/en/v4.4.3/esp32s3/api-reference/peripherals/adc.html)
-| Attenuation| Measurable input voltage range |
-|----------|----------|
-| ADC1_CHANNEL_2 | GPIO3|
-| ADC_ATTEN_DB_2_5 | 0 mV ~ 1250 mV|
-
-```
-#ADC1
-
-10 channels: GPIO1 - GPIO10
-
-ADC1_CHANNEL_2 -> ADC1 channel 2 is GPIO3
-
-Formula to calculate Vout = Dout * Vmax / Dmax (Not used)
-
-```
----
-### Issues
-* https://esp32.com/viewtopic.php?t=1459
-```
-idf.py menuconfig
-
-Component config -> FreeRTOS -> Kernel -> configTIMER_TASK_STACK_DEPTH
-configTIMER_TASK_STACK_DEPTH = changed to 16384 
-
-```
----
-
 
 
 
