@@ -15,89 +15,49 @@ LED functions : On, Off and Color change w.r.t Voltage at GPIO3/ADCH2
 //header file : wr_LED
 #include "wr_LED.h"
 
+#define numCases 10  // count from 0 till 10, total 11 cases
 
 static const char *TAG = "example";
 
 static led_strip_handle_t led_strip;
 
-static uint16_t rLED, gLED, bLED; 
+typedef struct
+{
+    uint16_t rLED;
+    uint16_t gLED;
+    uint16_t bLED;
 
+}rgbPixel; 
+
+const rgbPixel rgbAllvalues[] = {
+
+    {255, 0, 0},    // case 0: Red
+    {0, 255, 0},    // case 1: Green
+    {0, 0, 255},    // case 2: Blue
+    {255, 255, 0},  // case 3: Yellow
+    {255, 0, 255},  // case 4: Magenta
+    {0, 255, 255},  // case 5: Cyan
+    {128, 128, 128},// case 6: Gray
+    {255, 165, 0},  // case 7: Orange
+    {128, 0, 128},  // case 8: Purple
+    {0, 128, 128},  // case 9: Teal
+    {0, 255, 125}   // case 10 : turquoise 
+
+};
 
 void chngLEDcolr(uint8_t *pVColor){
 
-    switch (*pVColor)   // *pVcolor values[0,9]
-    {
-    case 0:
-        rLED = 255;
-        gLED = 0;
-        bLED = 0;   //red
-        break;
-    
-    case 1:
-        rLED = 0;
-        gLED = 255;
-        bLED = 0;   //green
-        break;
 
-    case 2:
-        rLED = 255;
-        gLED = 255;
-        bLED = 0;   //yellow
-        break;
+    if(*pVColor <= numCases){
+        
+        rgbPixel rgbLEDpiXel = rgbAllvalues[*pVColor];
+        led_strip_set_pixel(led_strip, 0, rgbLEDpiXel.rLED, rgbLEDpiXel.gLED, rgbLEDpiXel.bLED);
 
-    case 3:
-        rLED = 255;
-        gLED = 0;
-        bLED = 255; //magenta
-        break;
-
-    case 4:
-        rLED = 0;
-        gLED = 255;
-        bLED = 255;  //cyan
-        break;
-
-    case 5:
-        rLED = 128;
-        gLED = 0;
-        bLED =  128; //purple
-        break;
-
-    case 6:
-        rLED = 255;
-        gLED = 165;
-        bLED = 0; //orange
-        break;
-
-    case 7:
-        rLED = 255;
-        gLED = 192;
-        bLED = 203; //pink
-        break;
-    case 8:
-        rLED = 0;
-        gLED = 128;
-        bLED = 0;  //dark-green
-        break;
-    case 9:
-        rLED = 255;
-        gLED = 140;
-        bLED = 0;  //orange-red
-        break;
-    case 10:
-        rLED = 0;
-        gLED = 255;
-        bLED = 125;  //turquoise
-        break;
-    default:
-        rLED = 255;
-        gLED = 255;
-        bLED = 255;
-        break;
+        //ESP_LOGI(TAG, "Red Pixel = %d , Green Pixel = %d, Blue Pixel = %d", rgbLEDpiXel.rLED, rgbLEDpiXel.gLED, rgbLEDpiXel.bLED);
     }
-    //ESP_LOGI(TAG, "Normalized value of voltage : %d", *pVColor);
-    ESP_LOGI(TAG, "RGB pixel values are : Red %d Green %d Blue %d ", rLED, gLED, bLED);
-    led_strip_set_pixel(led_strip, 0, rLED, gLED, bLED);
+    else{
+        led_strip_set_pixel(led_strip, 0, 0, 0, 0);
+    }
     led_strip_refresh(led_strip);
 
 }
