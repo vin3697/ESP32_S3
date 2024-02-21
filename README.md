@@ -1,4 +1,4 @@
-## to do improvements / think about them:
+## To do improvements / think about them:
 
 * Naming of Variables
 * Passing by reference (actually needed?)
@@ -11,3 +11,5 @@
 * Think upon use of Auto Reload Software Timer?, could have used One Shot Software Timer
 * Returning the value from function. (from what point of execution it should be returned)
 * Using local variables (on which factors to be decided?)
+
+#### Refer "process_and_steps.md" file for implementation/documentation.
