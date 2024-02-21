@@ -44,7 +44,7 @@ static void blink_LED(void);
 
 //blinking with Freq.
 static void vLEDFreqTimerSetup();
-static void vLEDfreqTimerCallback( TimerHandle_t pxTimer );
+static void vLEDfreqTimerCallback();
 
 //color change w.r.t voltage
 static void vcolrChngTimerSetup();
@@ -75,7 +75,6 @@ void app_main(void)
 static void blink_LED(void){
 
     //ESP_LOGI(TAG, "Voltage in ms : %d", voltage);
-
     normalizeFactor = (voltage / FreqDividerConstant);      //normalized value between 0-10 (11 values)
 
     on_led();
@@ -170,7 +169,7 @@ static void vLEDFreqTimerSetup(){
 }
 
 //callback function for software timer :: LED blinking with Freq.
-static void vLEDfreqTimerCallback( TimerHandle_t pxTimer )
+static void vLEDfreqTimerCallback()
 {
 
     
@@ -182,10 +181,12 @@ static void vLEDfreqTimerCallback( TimerHandle_t pxTimer )
     //blink freq with Pot
     blink_LED();                   //blinking function [0ms-97ms] for its execution
 
-    //end_time = esp_timer_get_time();
-    //execution_time_ms = (end_time - start_time);
-    //execution_time_ms = execution_time_ms/1000;
-    //ESP_LOGI(TAG, "Execution time of LED blink function in milli seconds: %dms", execution_time_ms);
+    /*
+    end_time = esp_timer_get_time();
+    execution_time_ms = (end_time - start_time);
+    execution_time_ms = execution_time_ms/1000;
+    ESP_LOGI(TAG, "Execution time of LED blink function in milli seconds: %dms", execution_time_ms);
+    */
 
 }
 
