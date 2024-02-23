@@ -79,12 +79,14 @@ int read_adc(void){
     ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, EXAMPLE_ADC1_CHAN0, &adc_raw));
 
     if (do_calibration1_chan0) {
-        ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan0_handle, adc_raw, &voltage));
+        
+        ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan0_handle, adc_raw, &voltage));    
+        return voltage;
     
-    //! cant return voltage from here, as the function expects to be returned at the end of its scope.
-
     }
-    return voltage;
+    else{
+        return 0;
+    }
 
 }
 
