@@ -21,15 +21,19 @@ and color change depending upon frequency
 #include "wr_LED.h"
 #include "read_ADC.h" 
 #define PERIOD_MS 100
-// to use blinking LED with frequencies
-#define FreqConstant 10
-#define FreqDividerConstant 96
+
 
 //#define COLOR_CHANGE TRUE
 
+// to use blinking LED with frequencies
+#define FREQCONSTANT 10
+#define FREQMULTIPLLIER 0.0104
+
 static const char *TAG         = "example";
 static int voltage             = 0;
+
 static uint8_t normalizeFactor = 0;
+
 /*
 static int start_time        = 0;
 static int end_time          = 0;
@@ -75,13 +79,17 @@ void app_main(void)
 static void blink_LED(void){
 
     //ESP_LOGI(TAG, "Voltage in ms : %d", voltage);
-    normalizeFactor = (voltage / FreqDividerConstant);      //normalized value between 0-10 (11 values)
+
+
+    normalizeFactor = (uint8_t)(voltage * FREQMULTIPLLIER);      //normalized value between 0-10 (11 values)
 
     on_led();
-    vTaskDelay((FreqConstant - normalizeFactor)*xDelay); // blink_LED execution time = [0ms, ~97ms] 
+    vTaskDelay((FREQCONSTANT - normalizeFactor)*xDelay);         // blink_LED execution time = [0ms, ~97ms] 
     off_led();
     ESP_LOGI(TAG, "Frequency with LED is blinking : %d", normalizeFactor);
     
+
+
 }
 
 /*
@@ -126,8 +134,8 @@ static void vcolrChngCallback(){
     //end_time = esp_timer_get_time();
     //start_time = esp_timer_get_time();
     //color change method
-    normalizeFactor = (voltage / FreqDividerConstant);
-    chngLEDcolr(&normalizeFactor);               //execution time for color change function ~ 360us
+    normalizeFactor = (voltage * FREQMULTIPLLIER);
+    chngLEDcolr(normalizeFactor);               //execution time for color change function ~ 360us
 
     //end_time = esp_timer_get_time();
     //execution_time_us = (end_time - start_time);
