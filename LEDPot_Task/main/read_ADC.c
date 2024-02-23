@@ -25,8 +25,6 @@ static adc_oneshot_unit_handle_t adc1_handle;
 static adc_cali_handle_t adc1_cali_chan0_handle = NULL;
 static bool do_calibration1_chan0;
 
-static int adc_raw;
-static int voltage;
 const static char *TAG = "EXAMPLE";
 
 
@@ -66,34 +64,29 @@ void configure_adc(void){
     
 }
 
+/* 
+
+!VOLTAGE TYPE as INT : GOOD TO HAVE!
+warning: passing argument 3 of 'adc_cali_raw_to_voltage' from incompatible pointer type [-Wincompatible-pointer-types]
+
+*/
 int read_adc(void){
 
+    //local variable
+    static int adc_raw;
+    static int voltage;
 
     ESP_ERROR_CHECK(adc_oneshot_read(adc1_handle, EXAMPLE_ADC1_CHAN0, &adc_raw));
-    //ESP_LOGI(TAG, "ADC%d Channel[%d] Raw Data: %d", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN0, adc_raw);
+
     if (do_calibration1_chan0) {
         ESP_ERROR_CHECK(adc_cali_raw_to_voltage(adc1_cali_chan0_handle, adc_raw, &voltage));
-        //ESP_LOGI(TAG, "ADC%d Channel[%d] Cali Voltage: %d mV", ADC_UNIT_1 + 1, EXAMPLE_ADC1_CHAN0, voltage);
+    
+    //! cant return voltage from here, as the function expects to be returned at the end of its scope.
+
     }
-    //vTaskDelay(pdMS_TO_TICKS(1000)); //1sec delay was produced by this!
     return voltage;
 
-
 }
-/*
-void app_main(void)
-{
-    configure_adc();
-    while(1){
-        int start_time = esp_timer_get_time();
-        read_adc();
-        int end_time = esp_timer_get_time();
-        int execution_time_ms = (end_time - start_time)/1000;
-
-        ESP_LOGI(TAG, "Execution time in milli seconds: %dms", execution_time_ms);
-    }
-}*/
-
 
 /*---------------------------------------------------------------
         ADC Calibration
