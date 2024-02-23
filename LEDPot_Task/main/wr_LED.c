@@ -15,7 +15,7 @@ LED functions : On, Off and Color change w.r.t Voltage at GPIO3/ADCH2
 //header file : wr_LED
 #include "wr_LED.h"
 
-#define numCases 10  // count from 0 till 10, total 11 cases
+#define NUMCASES 10  // count from 0 till 10, total 11 cases
 
 static const char *TAG = "example";
 
@@ -45,12 +45,12 @@ const rgbPixel rgbAllvalues[] = {
 
 };
 
-void chngLEDcolr(uint8_t *pVColor){
+void chngLEDcolr(uint8_t VColor){
 
 
-    if(*pVColor <= numCases){
+    if(VColor <= NUMCASES){
         
-        rgbPixel rgbLEDpiXel = rgbAllvalues[*pVColor];
+        rgbPixel rgbLEDpiXel = rgbAllvalues[VColor];
         led_strip_set_pixel(led_strip, 0, rgbLEDpiXel.rLED, rgbLEDpiXel.gLED, rgbLEDpiXel.bLED);
 
         //ESP_LOGI(TAG, "Red Pixel = %d , Green Pixel = %d, Blue Pixel = %d", rgbLEDpiXel.rLED, rgbLEDpiXel.gLED, rgbLEDpiXel.bLED);
@@ -95,21 +95,3 @@ void configure_led(void)
     /* Set all LED off to clear all pixels */
     led_strip_clear(led_strip);
 }
-
-/*
-void app_main(void)
-{
-
-    //Configure the peripheral according to the LED type 
-    configure_led();
-
-    while (1) {
-        ESP_LOGI(TAG, "Turning the LED");
-        on_led();
-        //Toggle the LED state
-        vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
-        off_led();
-        vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
-    }
-}
-*/
