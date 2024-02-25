@@ -1,6 +1,9 @@
-## To do improvements / think about them:
+### <span style="color:lightblue"> Refer "process_and_steps.md" file for implementation/documentation. </span>
 
-* Naming of Variables
+
+### <span style="color:yellow">To do improvements / think about them:</span>
+
+* ~~Naming of Variables~~
 * ~~Passing by reference (actually needed?)~~
 
 * ~~Not relying on compiler for implicit typecast, do explicit.~~
@@ -15,4 +18,3 @@
 * ~~Returning the value from function. (from what point of execution it should be returned)~~
 * ~~Using local variables (on which factors to be decided?)~~
 
-#### Refer "process_and_steps.md" file for implementation/documentation.
