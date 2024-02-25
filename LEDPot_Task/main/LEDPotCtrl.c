@@ -32,7 +32,7 @@ and color change depending upon frequency
 static const char *TAG         = "example";
 static int voltage             = 0;
 
-static uint8_t normalizeFactor = 0;
+static uint8_t FrequencyCount  = 0;
 
 /*
 static int start_time        = 0;
@@ -47,17 +47,17 @@ const TickType_t xDelay  = CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS; //delay of 
 static void blink_LED(void);
 
 //blinking with Freq.
-static void vLEDFreqTimerSetup();
-static void vLEDfreqTimerCallback();
+static void vLEDFreq_TimerSetup();
+static void vLEDFreq_TimerCallback();
 
 //color change w.r.t voltage
-static void vcolrChngTimerSetup();
-static void vcolrChngCallback();
+static void vColorChange_TimerSetup();
+static void vColorChange_Callback();
 
 
 //software timer implementation
-TimerHandle_t xLEDblinkFreqTimer = NULL;                             //Timer handle for BlinkLED freq w.r.t voltage
-TimerHandle_t xcolrChngTimer     = NULL;                             //Timer handle for color change  w.r.t voltage
+TimerHandle_t xLEDblinkFreq_Timer = NULL;                             //Timer handle for BlinkLED freq w.r.t voltage
+TimerHandle_t xColorChange_Timer  = NULL;                             //Timer handle for color change  w.r.t voltage
 
 /*
                                         app_main function
@@ -69,9 +69,9 @@ void app_main(void)
     configure_adc();
     
     #ifdef COLOR_CHANGE
-        vcolrChngTimerSetup();
+        vColorChange_TimerSetup();
     #else
-        vLEDFreqTimerSetup();
+        vLEDFreq_TimerSetup();
     #endif
     
 }
@@ -81,12 +81,12 @@ static void blink_LED(void){
     //ESP_LOGI(TAG, "Voltage in ms : %d", voltage);
 
 
-    normalizeFactor = (uint8_t)(voltage * FREQMULTIPLLIER);      //normalized value between 0-10 (11 values)
+    FrequencyCount = (uint8_t)(voltage * FREQMULTIPLLIER);      // normalized value between 0-10 (11 values)
 
     on_led();
-    vTaskDelay((FREQCONSTANT - normalizeFactor)*xDelay);         // blink_LED execution time = [0ms, ~97ms] 
+    vTaskDelay((FREQCONSTANT - FrequencyCount)*xDelay);         // blink_LED execution time = [0ms, ~97ms] 
     off_led();
-    ESP_LOGI(TAG, "Frequency with LED is blinking : %d", normalizeFactor);
+    ESP_LOGI(TAG, "Frequency with LED is blinking : %d", FrequencyCount);
     
 
 
@@ -96,18 +96,18 @@ static void blink_LED(void){
                              below is LED color change software timer implementation
 */
 
-static void vcolrChngTimerSetup(){
+static void vColorChange_TimerSetup(){
 
     // create then start the auto-reload timer that is responsible for
     // changing the LED color with different frequencies.
-    xcolrChngTimer = xTimerCreate( "colrChngTimer",               // Just a text name, not used by the kernel.
+    xColorChange_Timer = xTimerCreate( "colrChngTimer",               // Just a text name, not used by the kernel.
                                     pdMS_TO_TICKS(PERIOD_MS),     // timer period = 100milliSecs, as response time has to be 100ms
                                     pdTRUE,                       // timer is a Auto Reload timer which make the task periodic in nature.
                                     0,                            // id is not used by the callback so can take any value.
-                                    vcolrChngCallback             // callback function that changes the color of LED w.r.t voltage.
+                                    vColorChange_Callback             // callback function that changes the color of LED w.r.t voltage.
                                 );
 
-    if( xcolrChngTimer == NULL )
+    if( xColorChange_Timer == NULL )
     {
         // The timer was not created.
         ESP_LOGE(TAG, "Failed to create timer");
@@ -115,7 +115,7 @@ static void vcolrChngTimerSetup(){
     else
     {
         // start the timer.  No block time is specified.
-        if( xTimerStart( xcolrChngTimer, 0 ) != pdPASS ) // xTimerStart(xTimer, xTicksToWait)
+        if( xTimerStart( xColorChange_Timer, 0 ) != pdPASS ) // xTimerStart(xTimer, xTicksToWait)
         {
             // The timer could not be set into the Active state.
             ESP_LOGE(TAG, "Failed to set color change timer into active state");
@@ -124,7 +124,7 @@ static void vcolrChngTimerSetup(){
 
 }
 
-static void vcolrChngCallback(){
+static void vColorChange_Callback(){
 
     //start_time = esp_timer_get_time();
     //get voltage from ADC
@@ -134,8 +134,8 @@ static void vcolrChngCallback(){
     //end_time = esp_timer_get_time();
     //start_time = esp_timer_get_time();
     //color change method
-    normalizeFactor = (voltage * FREQMULTIPLLIER);
-    chngLEDcolr(normalizeFactor);               //execution time for color change function ~ 360us
+    FrequencyCount = (voltage * FREQMULTIPLLIER);
+    change_color(FrequencyCount);               //execution time for color change function ~ 360us
 
     //end_time = esp_timer_get_time();
     //execution_time_us = (end_time - start_time);
@@ -148,18 +148,18 @@ static void vcolrChngCallback(){
                              below is Blink LED Freq software timer implementation
 */
 
-static void vLEDFreqTimerSetup(){
+static void vLEDFreq_TimerSetup(){
 
     // create then start the auto-reload timer that is responsible for
     // blinking the LED with different frequencies.
-    xLEDblinkFreqTimer = xTimerCreate( "LEDblinkTimer",           // Just a text name, not used by the kernel.
+    xLEDblinkFreq_Timer = xTimerCreate( "LEDblinkTimer",           // Just a text name, not used by the kernel.
                                     pdMS_TO_TICKS(PERIOD_MS),     // timer period = 100milliSecs, as response time has to be 100ms
                                     pdTRUE,                       // timer is a auto reload timer.
                                     0,                            // id is not used by the callback so can take any value.
-                                    vLEDfreqTimerCallback         // callback function that blinks LED w.r.t Freq.
+                                    vLEDFreq_TimerCallback         // callback function that blinks LED w.r.t Freq.
                                 );
 
-    if( xLEDblinkFreqTimer == NULL )
+    if( xLEDblinkFreq_Timer == NULL )
     {
         // The timer was not created.
         ESP_LOGE(TAG, "Failed to create timer");
@@ -167,7 +167,7 @@ static void vLEDFreqTimerSetup(){
     else
     {
         // Start the timer.  No block time is specified.
-        if( xTimerStart( xLEDblinkFreqTimer, 0 ) != pdPASS ) // xTimerStart(xTimer, xTicksToWait)
+        if( xTimerStart( xLEDblinkFreq_Timer, 0 ) != pdPASS ) // xTimerStart(xTimer, xTicksToWait)
         {
             // The timer could not be set into the Active state.
             ESP_LOGE(TAG, "Failed to set blink LED timer into active state");
@@ -177,7 +177,7 @@ static void vLEDFreqTimerSetup(){
 }
 
 //callback function for software timer :: LED blinking with Freq.
-static void vLEDfreqTimerCallback()
+static void vLEDFreq_TimerCallback()
 {
 
     
