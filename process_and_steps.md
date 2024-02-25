@@ -67,7 +67,7 @@ idf.py create-project-from-example "espressif/led_strip^2.5.3:led_strip_rmt_ws28
 ```
 ---
 
-#### ADC : GPIO3 [API reference](https://docs.espressif.com/projects/esp-idf/en/v4.4.3/esp32s3/api-reference/peripherals/adc.html)
+#### ADC : GPIO3 [API reference](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/adc_oneshot.html)
 | Attenuation| Measurable input voltage range |
 |----------|----------|
 | ADC1_CHANNEL_2 | GPIO3|
