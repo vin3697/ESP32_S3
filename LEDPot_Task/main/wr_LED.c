@@ -45,12 +45,12 @@ const rgbPixel rgbAllvalues[] = {
 
 };
 
-void chngLEDcolr(uint8_t VColor){
+void change_color(uint8_t FrequencyCount){
 
 
-    if(VColor <= NUMCASES){
+    if(FrequencyCount <= NUMCASES){
         
-        rgbPixel rgbLEDpiXel = rgbAllvalues[VColor];
+        rgbPixel rgbLEDpiXel = rgbAllvalues[FrequencyCount];
         led_strip_set_pixel(led_strip, 0, rgbLEDpiXel.rLED, rgbLEDpiXel.gLED, rgbLEDpiXel.bLED);
 
         //ESP_LOGI(TAG, "Red Pixel = %d , Green Pixel = %d, Blue Pixel = %d", rgbLEDpiXel.rLED, rgbLEDpiXel.gLED, rgbLEDpiXel.bLED);

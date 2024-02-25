@@ -12,4 +12,4 @@
 void on_led(void);
 void off_led(void);
 void configure_led(void);
-void chngLEDcolr(uint8_t VColor);
+void change_color(uint8_t FrequencyCount);
