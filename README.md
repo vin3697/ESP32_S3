@@ -27,3 +27,11 @@
 * Think upon use of Auto Reload Software Timer?, could have used One Shot Software Timer?
 
 ---
+### ◽ Below chart gives an idea about overall functioning of different software components
+
+![image](LEDPot_Task/Module_Graph.png)
+
+
+### 🚀 FreeRTOS : Auto-Reload Software Timer
+
+![FreeRTOSimage](LEDPot_Task/softwareTimer.png)
